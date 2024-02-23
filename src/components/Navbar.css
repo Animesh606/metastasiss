@@ -56,16 +56,19 @@ header ul li a:hover{
     height: 120px;
     width: 120px;
     overflow: hidden;
-
+    left:-2%;
+    background-size: cover;
+  background-position: center;
 }
  .Image{
    width: 150px;
    height: 150px;
+  
 }
 @media(max-width:1000px){
     .mobile{
         display: block;
-        padding-right: 30px;
+        padding-right: 20px;
     }
     .search-box button{
         position: absolute;
@@ -108,7 +111,7 @@ header ul li a:hover{
         margin-left: 0px;
         text-transform: uppercase;
         align-items: center;
-        font-size: .8rem;
+        font-size: .7rem;
     }
   
 }
