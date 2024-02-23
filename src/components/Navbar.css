@@ -11,20 +11,20 @@ header{
 }
 #chk1{
     display: none;
-     
-     
 }
 i{
     color: #fff;
     cursor: pointer;
 }
 header .logo{
-    flex: 1;
+    /* flex: 1; */
     color:#fff;
-     
-    margin-left: 50px;
+    display: flex;
+    gap:10px;
+    margin-left: 25px;
     text-transform: uppercase;
-    font-size: 15px;
+    align-items: center;
+    font-size: 1rem;
 }
 header ul {
     flex:2;
@@ -45,15 +45,33 @@ header ul li a{
 header ul li a:hover{
     border-bottom: 2px solid cadetblue;
 }
-header .menu{
-    font-size: 2.5em;
+.mobile{
     display: none;
+    padding-right: 30px;
+}
+.icon{
+    font-size: 30px;
+}
+.img{
+    height: 120px;
+    width: 120px;
+    overflow: hidden;
+
+}
+ .Image{
+   width: 150px;
+   height: 150px;
 }
 @media(max-width:1000px){
+    .mobile{
+        display: block;
+        padding-right: 30px;
+    }
     .search-box button{
         position: absolute;
     }
-    header ul{
+   .nav{
+      
         position: fixed;
         top:100px;
         right: -100%;
@@ -64,14 +82,34 @@ header .menu{
         align-items: center;
         transition: right 0.5s linear;
     }
-    header .menu{
-        display: block;
-        width:100px;
-        text-align: center;
+   .navactive{
+    backdrop-filter: blur(10px);
+        position: fixed;
+        top:90px;
+        right: 0px;
+        backdrop-filter: 200px;
+        background: rgba(0,0,0,0.5);
+        /* height: calc(100vh -100px); */
+        height: 100vh;
+        width:50%;
+        flex-direction: column;
+        align-items: center;
+        transition: right 0.5s linear;
     }
     #chk1:checked ~ ul{
         right: 0;
         
     }
+    header .logo{
+        /* flex: 1; */
+        color:#fff;
+        display: flex;
+        gap:0px;
+        margin-left: 0px;
+        text-transform: uppercase;
+        align-items: center;
+        font-size: .8rem;
+    }
   
 }
+/* for sidebar */
