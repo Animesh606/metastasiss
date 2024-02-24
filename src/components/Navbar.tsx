@@ -15,7 +15,7 @@ export const Navbar=()=>{
         <input type="checkbox" name="" id="chk1" />
         <div className="logo">
             <div className="img">
-             <Image className="Image" src="/Metastasiss.png" alt={""} width={100} height={100}></Image>
+             <Image className="Image" src="/Metastasis.png" alt={""} width={100} height={100}></Image>
              </div>
              <div>
             <h1>Meta-stasiss</h1>
