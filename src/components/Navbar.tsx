@@ -18,7 +18,7 @@ export const Navbar=()=>{
              <Image className="Image" src="/Metastasiss.png" alt={""} width={100} height={100}></Image>
              </div>
              <div>
-            <h1>Metastasiss</h1>
+            <h1>Meta-stasiss</h1>
             </div>
             </div>
             <div className="search-box">
