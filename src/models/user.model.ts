@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import bcrypt from "bcrypt";
 
 const userSchema = new mongoose.Schema(
     {
@@ -12,7 +13,7 @@ const userSchema = new mongoose.Schema(
         },
         phone: {
             type: String,
-            length: 10
+            required: true
         },
         college: String,
         password: {
@@ -33,6 +34,10 @@ const userSchema = new mongoose.Schema(
             type: Boolean,
             default: false
         },
+        isAdmin: {
+            type: Boolean,
+            default: false
+        },
         profileImage: String,
         verificationToken: String,
         forgetPasswordToken: String
@@ -41,6 +46,17 @@ const userSchema = new mongoose.Schema(
         timestamps: true
     }
 );
+
+userSchema.pre("save", async function(next) {
+    if(this.isModified("password")) {
+        this.password = await bcrypt.hash(this.password, 10);
+    }
+    next();
+});
+
+userSchema.methods.isCorrectPassword = async function(password: string) {
+    return await bcrypt.compare(password, this.password);
+};
 
 const User = mongoose.models.User || mongoose.model("User", userSchema);
 
