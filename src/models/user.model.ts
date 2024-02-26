@@ -6,23 +6,36 @@ const userSchema = new mongoose.Schema(
             type: String,
             required: true
         },
-        profileImage: {
-            type: String
-        },
         email: {
-            type: String
+            type: String,
+            required: true
         },
         phone: {
             type: String,
             length: 10
         },
+        college: String,
+        password: {
+            type: String,
+            required: true
+        },
+        isVerified: {
+            type: Boolean,
+            default: false
+        },
         mode: {
             type: String,
-            enum: ["online", "offline"]
+            enum: ["online", "offline"],
+            default: "online"
         },
-        transactionId: {
-            type: String
-        }
+        transactionId: String,
+        transactionVerified: {
+            type: Boolean,
+            default: false
+        },
+        profileImage: String,
+        verificationToken: String,
+        forgetPasswordToken: String
     },
     {
         timestamps: true
