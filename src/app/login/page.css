@@ -1,0 +1,239 @@
+.LoginSignUpContainer {
+    width: 100vw;
+    height: 100vh;
+    max-width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: url('../../../public/background.jpg');
+    /* background-color: rgb(231, 231, 231); */
+    position: fixed;
+    top: 0%;
+    left: 0;
+  }
+  .LoginSignin {
+    display: none;
+    position: absolute;
+    background-color: rgba(192, 189, 189, 0.219);
+    backdrop-filter: blur(2px);
+    width: 30vw;
+    height: 65vh;
+    box-sizing: border-box;
+    overflow: hidden;
+    border-radius: 10px;
+  }
+  .LoginSignin_login {
+    position: absolute;
+    background-color: rgba(192, 189, 189, 0.219);
+    backdrop-filter: blur(2px);
+    width: 30vw;
+    height: 50vh;
+    box-sizing: border-box;
+    overflow: hidden;
+    border-radius: 10px;
+  }
+  .login_signup_toggel {
+    display: flex;
+    height: 5vmax;
+  }
+  .head{
+    position: relative;
+    border-bottom: 1px solid rgba(2, 13, 21,.322);
+  }
+  .login_signup_toggel > p {
+    color: rgba(0, 0, 0, 0.678);
+    font: 300 1.3vmax "Roboto";
+    transition: all 0.5s;
+    cursor: pointer;
+    display:flex;
+    text-align: center;
+    align-items:center;
+    justify-content: center;
+    width: 100%;
+    
+  }
+  .login_signup_toggel > p:hover {
+    color:rgb(49, 158, 236);
+  }
+  .LoginSignin > div > button {
+    position: absolute;
+    bottom: 0;
+    background-color: rgb(71, 175, 255);
+    height: 3px;
+    width: 50%;
+    border: none;
+    transition: all 0.5s;
+  }
+ .loginForm,
+ .signUpForm  {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: auto;
+  padding: 2vmax;
+  justify-content: space-evenly;
+  height: 70%;
+  transition: all 0.5s;
+}
+.loginForm > div,
+.signUpForm > div {
+  display: flex;
+  width: 100%;
+  align-items: center;
+}
+.loginForm > div > input,
+.signUpForm > div > input {
+    padding: 1vmax 4vmax;
+    padding-right: 1vmax;
+    width: 100%;
+    box-sizing: border-box;
+    border: 1px solid rgba(0, 0, 0, 0.267);
+    border-radius: 4px;
+    font: 300 0.9vmax cursive;
+    outline: none;
+  }
+
+.loginForm > div > svg,
+.signUpForm > div > svg {
+  position: absolute;
+  transform: translateX(1vmax);
+  font-size: 1.6vmax;
+  color: rgba(0, 0, 0, 0.623);
+}
+
+.loginForm > a {
+  color: rgba(0, 0, 0, 0.651);
+  text-decoration: none;
+  align-self: flex-end;
+  transition: all 0.5s;
+  font: 500 1vmax "Gill Sans";
+}
+.loginForm > a:hover{
+    cursor: pointer;
+    color: rgb(0, 85, 255);
+}
+.loginBtn,
+.signUpBtn {
+  border: none;
+  background-color: tomato;
+  color: white;
+  font: 300 0.9vmax "Roboto";
+  width: 100%;
+  padding: 0.8vmax;
+  cursor: pointer;
+  transition: all 0.5s;
+  border-radius: 4px;
+  outline: none;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.219);
+}
+
+.loginBtn:hover,
+.signUpBtn:hover {
+  background-color: rgb(179, 66, 46);
+}
+.shiftToLeft {
+  transform: translateX(-100%);
+}
+.shiftToNeutral {
+  transform: translateX(0%);
+}
+
+.shiftToNeutralForm {
+  transform: translateX(0%) translateY(-100%);
+}
+
+.shiftToRight {
+  transform: translateX(100%);
+}
+#registerImage{
+  display: flex;
+  /* flex-direction: column; */
+  gap: 30px;
+}
+#registerImage > img {
+    width: 3.5vmax;
+    height: 3.5vmax;
+    border-radius: 50%;
+  }
+  #registerImage > input {
+    display: flex;
+    padding: 0%;
+  }
+  
+  #registerImage > input::file-selector-button {
+    cursor: pointer;
+    width: 100%;
+    z-index: 2;
+    height: 5vh;
+    border: none;
+    margin: 0%;
+    font: 400 0.8vmax cursive;
+    transition: all 0.5s;
+    padding: 0 1vmax;
+    color: rgba(0, 0, 0, 0.623);
+    background-color: rgb(255, 255, 255);
+  }
+  #registerImage > input::file-selector-button:hover {
+    background-color: rgb(235, 235, 235);
+  }
+
+  @media screen and ( max-width: 850px){
+    .LoginSignin {
+      width:35vh;
+      height:48vh;
+    }
+    .login_signup_toggel {
+      height: 8vh;
+    }
+    .login_signup_toggel >p {
+      font-size: large;
+    }
+    .loginForm > div > input,
+    .signUpForm > div > input {
+    height: 30px;
+    padding: 2vmax 4vmax;
+    padding-right: 1vmax;
+    width: 100%;
+    box-sizing: border-box;
+    border: 1px solid rgba(0, 0, 0, 0.267);
+    border-radius: 4px;
+    font: 400 1.2vmax cursive;
+    outline: none;
+  }
+  .loginBtn,
+  .signUpBtn {
+  height: 30px;
+  border: none;
+  background-color: tomato;
+  color: white;
+  font: 300 0.9vmax "Roboto";
+  width: 100%;
+  padding: 1.8vmax;
+  cursor: pointer;
+  transition: all 0.5s;
+  border-radius: 4px;
+  outline: none;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.219);
+}
+.loginForm a {
+  font-size: large;
+}
+.loginBtn ,
+.signUpBtn {
+  font-size: large;
+  height: 45px;
+}
+.signUpForm > div > input{
+  height: 40px;
+}
+#registerImage{
+  display: flex;
+  /* flex-direction: column; */
+  gap: 20px;
+}
+#registerImage > img {
+  width: 4vmax;
+  height: 4vmax;
+  border-radius: 60%;
+}
+}

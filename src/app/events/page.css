@@ -1,10 +1,34 @@
 .banner {
     margin-top: 0;
-    padding: 260px 0 100px 0;
+    padding: 100px 0 0px 0;
     background-image: url('../../../public/background.jpg');
     background-position: top center;
     background-size: cover;
     background-repeat: no-repeat;
+  }
+  .aligh-items-center{
+    display: flex;
+    flex-direction: row;
+    padding: 3rem 6rem;
+  }
+  .firsti{
+     width: 50%;
+     
+  }
+  .imagecontaner{
+    position: relative;
+    width: 100%;
+    height: 100%;
+  }
+  .secondi{
+    width: 50%;
+    background:cover;
+    display: flex;
+    background-size: cover;
+    background-position: center;
+    align-items: center;
+    justify-content: center;
+
   }
   .banner .tagline {
     font-weight: 700;
@@ -34,23 +58,38 @@
   }
   .banner button {
     color: #fff;
-    font-weight: 700;
     font-size: 20px;
     margin-top: 60px;
     letter-spacing: 0.8px;
-    display: flex;
-    align-items: center;
+    display: inline-block;
+    outline: 0;
+    border:2px;
+    cursor: pointer;
+    text-decoration: none;
+    position: relative;
+    background: #fff;
+    line-height: 30px;
+    border-radius: 30px;
+    padding: 20px;
+    font-size: 20px;
+    font-weight: 400;
+    box-shadow: rgb(255, 198, 0) -2px -2px 0px 2px, rgb(246, 84, 174) 0px 0px 0px 4px, rgba(0, 0, 0, 0.05) 0px 0px 2px 7px;
+    transition: all 0.2s;
+    background-color: rgb(32, 29, 29);
   }
-  .banner button svg {
+  
+  /* .banner button svg {
     font-size: 25px;
     margin-left: 10px;
     transition: 0.3s ease-in-out;
     line-height: 1;
-  }
+  } */
   .banner button:hover svg {
     margin-left: 25px;
   }
   .banner img {
+    width: 100%;
+    height: 100%;
     animation: updown 3s linear infinite;
   }
   @keyframes updown {
@@ -66,4 +105,22 @@
   }
   .txt-rotate > .wrap {
     border-right: 0.08em solid #e5dfdf;
+  }
+  @media(max-width:1000px)
+  {
+    .aligh-items-center{
+      display: flex;
+      flex-direction: column;
+      padding: 3rem 3rem;
+    }
+    .firsti{
+      width: 100%;
+    }
+    .secondi{
+      width: 100%;
+    }
+    .banner h1{
+      color:rgb(45, 183, 190);
+      font-size: 50px;
+    }
   }

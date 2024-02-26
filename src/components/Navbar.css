@@ -52,6 +52,7 @@ header ul li a:hover{
 }
 .icon{
     font-size: 30px;
+    color: rgb(10, 117, 117);
 }
 .img{
     height: 150px;
@@ -116,6 +117,19 @@ header ul li a:hover{
         text-transform: uppercase;
         align-items: center;
         font-size: .7rem;
+    }
+     .logo h1{
+        display: none;
+     }
+     .Image{
+        width: 80px;
+        height: 80px;
+       
+     }
+     .img{
+        height: 150px;
+        width: 150px;
+       padding-left: 5px;
     }
   
 }

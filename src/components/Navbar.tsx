@@ -7,7 +7,7 @@ import {faBars } from '@fortawesome/free-solid-svg-icons'
 import {useState} from "react"
 import Image from "next/image"
 export const Navbar=()=>{
-    const [hover,setHover]=useState(true);
+    const [hover,setHover]=useState(false);
     console.log(hover);
     return(
         <>
@@ -24,10 +24,10 @@ export const Navbar=()=>{
             <div className="search-box">
             </div>
             <ul className={` ${hover ? 'navactive' : 'nav'}`}>
-                <li><a href="#">Home</a></li>
-                <li><a href="#">Events</a></li>
-                <li><a href="#">Contact</a></li>
-                <li><a href="#" className="login">Login</a></li>
+                <li><a href="/home">Home</a></li>
+                <li><a href="/events">Events</a></li>
+                <li><a href="/contact">Contact</a></li>
+                <li><a href="/login" className="login">Login</a></li>
                 
             </ul>
             <div className=" mobile"  onClick={()=>{setHover(!hover)}}> <FontAwesomeIcon icon={faBars} className="icon"/></div>
