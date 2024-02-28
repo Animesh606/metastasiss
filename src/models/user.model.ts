@@ -58,6 +58,20 @@ userSchema.methods.isCorrectPassword = async function(password: string) {
     return await bcrypt.compare(password, this.password);
 };
 
+userSchema.methods.generateVerificationToken = async function() {
+    const hashedToken = await bcrypt.hash(`${this._id}`, 10);
+    this.verificationToken = hashedToken;
+    await this.save();
+    return hashedToken;
+};
+
+userSchema.methods.generateForgotPasswordToken = async function() {
+    const hashedToken = await bcrypt.hash(`${this._id}`, 10);
+    this.forgetPasswordToken = hashedToken;
+    await this.save();
+    return hashedToken;
+};
+
 const User = mongoose.models.User || mongoose.model("User", userSchema);
 
 export default User;
