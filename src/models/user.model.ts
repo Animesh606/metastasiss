@@ -72,6 +72,18 @@ userSchema.methods.generateForgotPasswordToken = async function() {
     return hashedToken;
 };
 
+userSchema.methods.verifyUser = async function() {
+    this.verificationToken = undefined;
+    this.isVerified = true;
+    await this.save();
+};
+
+userSchema.methods.resetPassword = async function(password: string) {
+    this.password = password;
+    this.forgetPasswordToken = undefined;
+    await this.save();
+};
+
 const User = mongoose.models.User || mongoose.model("User", userSchema);
 
 export default User;
