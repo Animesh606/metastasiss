@@ -1,5 +1,6 @@
 import User from "@/models/user.model";
 import connectDB from "@/utils/db.connect";
+import sendEmail from "@/utils/mailer";
 import { NextRequest, NextResponse } from "next/server";
 
 interface userDetails {
@@ -37,10 +38,20 @@ export async function POST(req: NextRequest) {
             email,
             phone,
             college,
-            password,
+            password
         });
 
         await user.save();
+
+        // Generate verification token for the newly created user
+        const hashedToken = await user.generateVerificationToken();
+
+        // Send email verification mail to user
+        await sendEmail("verifyEmail", {
+            email,
+            fullName,
+            url: `${process.env.DOMAIN_NAME}/verifyEmail?token=${hashedToken}`,
+        });
 
         // Send response back
         return NextResponse.json(
