@@ -95,7 +95,8 @@ export default function login() {
             console.log("submitted");
             e.preventDefault();
             setLoading(true);
-            const response = await axios.post("/api/user/login", user);
+            console.log({loginemail,loginpassword});
+            const response = await axios.post("/api/user/login", {loginemail,loginpassword});
             console.log("Login success", response.data);
             toast.success("Login success");
             router.push("/profile");
