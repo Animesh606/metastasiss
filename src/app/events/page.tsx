@@ -1,27 +1,18 @@
 
 "use client"
-// import React from "react";
-// import { Commingsoon } from "@/components/Commingsoon";
-// export default function home(){
-//     return(
-//     <>
-//      <Commingsoon/>
-//     </>
-//     )
-// }
 import React from "react";
 import { useState, useEffect } from "react";
-// import headerImg from "../assets/img/header-img.svg";
-// import { ArrowRightCircle } from 'react-bootstrap-icons';
 import TrackVisibility from 'react-on-screen';
+import Image from "next/image";
 import "./page.css"
+import {Footer} from "@/components/Footer"
 export default function home() {
   const [loopNum, setLoopNum] = useState(0);
   const [isDeleting, setIsDeleting] = useState(false);
   const [text, setText] = useState('');
   const [delta, setDelta] = useState(300 - Math.random() * 100);
   const [index, setIndex] = useState(1);
-  const toRotate = [ "Web Developer", "Web Designer", "UI/UX Designer" ];
+  const toRotate = [ "Metastasiss"  ];
   const period = 2000;
 
   useEffect(() => {
@@ -58,30 +49,27 @@ export default function home() {
   }
 
   return (
+    <>
     <section className="banner" id="home">
       <div>
         <div className="aligh-items-center">
-          <div >
+          <div className="firsti">
             <TrackVisibility>
               {({ isVisible }) =>
               <div className={isVisible ? "animate__animated animate__fadeIn" : ""}>
-                <span className="tagline">Welcome to my Portfolio</span>
-                <h1>{`Hi! I'm Judy`} <span className="txt-rotate"  data-rotate='[ "Web Developer", "Web Designer", "UI/UX Designer" ]'><span className="wrap">{text}</span></span></h1>
+                <h1>{} <span className="txt-rotate"  ><span className="wrap">{text}{isDeleting ? ' ' : null}</span></span></h1>
                   <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
-                  <button onClick={() => console.log('connect')}>Let’s Connect </button>
+                  <button onClick={() => console.log('connect')}><span>Let's connect</span> </button>
               </div>}
             </TrackVisibility>
           </div>
-          <div >
-            <TrackVisibility> 
-              {({ isVisible }) =>
-                <div className={isVisible ? "animate__animated animate__zoomIn" : ""}>
-                  {/* <img src={headerImg} alt="Header Img"/> */}
-                </div>}
-            </TrackVisibility>
+          <div className="secondi" >
+                   <Image className="Image" src="/vr.png" alt={""} width={150} height={150}></Image>
           </div>
         </div>
       </div>
     </section>
+    <Footer/>
+    </>
   )
 }
