@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
 
 const userSchema = new mongoose.Schema(
     {
@@ -70,6 +71,13 @@ userSchema.methods.generateForgotPasswordToken = async function() {
     this.forgetPasswordToken = hashedToken;
     await this.save();
     return hashedToken;
+};
+
+userSchema.methods.generateAccessToken = function() {
+    return jwt.sign(
+        { _id: this._id, fullName: this._fullName, email: this.email },
+        `${process.env.SECRET_KEY}`
+    );
 };
 
 userSchema.methods.verifyUser = async function() {
