@@ -1,9 +1,13 @@
 import User from "@/models/user.model";
+import connectDB from "@/utils/db.connect";
 import sendEmail from "@/utils/mailer";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(req: NextRequest) {
     try {
+        // Connect with database
+        await connectDB();
+
         // Get token from request
         const { token } = await req.json();
 
@@ -11,7 +15,7 @@ export async function POST(req: NextRequest) {
         const user = await User.findOne({
             verificationToken: { $exists: true, $eq: token },
         });
-        
+
         // In case no user found in database
         if (!user) {
             return NextResponse.json(
@@ -26,8 +30,8 @@ export async function POST(req: NextRequest) {
         // Send Registration Successful mail
         await sendEmail("userRegistration", {
             email: user.email,
-            fullName: user.fullName
-        })
+            fullName: user.fullName,
+        });
 
         return NextResponse.json(
             { message: "Email Verified Successfully" },
