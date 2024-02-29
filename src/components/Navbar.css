@@ -1,4 +1,4 @@
-header{
+.heade{
     width:100%;
     height: 90px;
     display: flex;
@@ -7,16 +7,9 @@ header{
     position: fixed;
     z-index: 99;
     box-shadow: 0 0 20px #000;
-    background: rgba(8, 6, 6, .7);
+    background: rgba(15, 14, 14, 0.7);
 }
-#chk1{
-    display: none;
-}
-i{
-    color: #fff;
-    cursor: pointer;
-}
-header .logo{
+.heade .logo{
     /* flex: 1; */
     color:#fff;
     display: flex;
@@ -27,35 +20,39 @@ header .logo{
     justify-content: center;
     font-size: 1rem;
 }
-header ul {
-    flex:2;
+.heade ul {
+   
     display: flex;
     justify-content: space-evenly;
-}
-header ul li{
+} 
+.heade ul li{
     list-style: none;
 }
-header ul li a{
+.heade ul li a{
     text-decoration: none;
     color:#fff;
     font-weight: 600;
     text-transform: uppercase;
     padding: 10px 15px;
 }
-
-header ul li a:hover{
+.heade .links{
+width: 70%;
+right: 80px;
+}
+.heade ul li a:hover{
+    color: cadetblue;
     border-bottom: 2px solid cadetblue;
 }
 .mobile{
     display: none;
     padding-right: 30px;
 }
-.icon{
+.icons{
     font-size: 30px;
     color: rgb(10, 117, 117);
 }
 .img{
-    height: 150px;
+    height: 120px;
     width: 120px;
     overflow: hidden;
     left:-2%;
@@ -66,20 +63,32 @@ header ul li a:hover{
     justify-items: center;
 }
  .Image{
-   width: 100px;
-   height: 100px;
+   width: 90px;
+   height: 90px;
   
 }
+.loggins{
+    height: 20px;
+    background-image: linear-gradient(-180deg,rgb(60, 154, 159), rgb(25, 69, 71));
+    border-radius: 10px;
+}
+.loggins:hover{
+    background-image: linear-gradient(-180deg, rgb(25, 69, 71),rgb(60, 154, 159));
+}
 @media(max-width:1000px){
+    /* .heade{
+        display: flex;
+    } */
     .mobile{
+        
         display: block;
-        padding-right: 20px;
+        /* padding-right: 20px; */
+        right: 10px;
     }
     .search-box button{
         position: absolute;
     }
    .nav{
-      
         position: fixed;
         top:100px;
         right: -100%;
@@ -90,6 +99,7 @@ header ul li a:hover{
         align-items: center;
         transition: right 0.5s linear;
     }
+   
    .navactive{
     backdrop-filter: blur(10px);
         position: fixed;
@@ -104,11 +114,7 @@ header ul li a:hover{
         align-items: center;
         transition: right 0.5s linear;
     }
-    #chk1:checked ~ ul{
-        right: 0;
-        
-    }
-    header .logo{
+    .heade .logo{
         /* flex: 1; */
         color:#fff;
         display: flex;

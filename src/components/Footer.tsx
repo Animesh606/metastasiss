@@ -71,11 +71,11 @@ export const Footer=()=>{
                                     <div className="content">
                                         <a href="#">
                                             <p>
-                                                    Did son unreserved themselves indulgence its
+                                                   Lorem ipsum dolor, sit amet consectetur adipis
                                             </p>
                                         </a>
                                         <span>
-                                            Dec 20, 2023
+                                            Dec 20, 2024
                                         </span>
                                     </div>
                                 </div>
@@ -86,11 +86,11 @@ export const Footer=()=>{
                                     <div className="content">
                                         <a href="#">
                                             <p>
-                                                    Rapturous am eagerness it as resolving household
+                                            Lorem ipsum dolor, sit amet consectetur adipis
                                             </p>
                                         </a>
                                         <span>
-                                        Dec 10, 2023
+                                        Dec 10, 2024
                                         </span>
                                     </div>
                                 </div>
