@@ -2,33 +2,52 @@
 import React, { Fragment, useEffect, useRef, useState } from "react";
 import Link from 'next/link';
 import "./page.css"
+import { faEnvelope } from "@fortawesome/free-regular-svg-icons/faEnvelope";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEye } from "@fortawesome/free-solid-svg-icons";
+import { faEyeSlash } from "@fortawesome/free-solid-svg-icons";
+import { faKey } from "@fortawesome/free-solid-svg-icons";
+import { faAddressCard } from "@fortawesome/free-solid-svg-icons";
+import { faPhone } from "@fortawesome/free-solid-svg-icons";
+import { faUniversity } from "@fortawesome/free-solid-svg-icons";
+import axios from "axios";
+import {useRouter} from "next/navigation";
+import { toast } from 'react-hot-toast';
 export default function login() {
+    const login = useRef<HTMLDivElement | null>(null);
+    const signin = useRef<HTMLDivElement | null>(null);
+    const logsintab = useRef<HTMLDivElement | null>(null);
     const logintab = useRef<HTMLDivElement | null>(null);
     const registerTab = useRef<HTMLDivElement | null>(null);
     const switcherTab = useRef<HTMLButtonElement | null>(null);
     const [loginemail, setLoginemail] = useState("");
     const [loginpassword, setLoginpassword] = useState("");
-
+    const [log, setLog] = useState(true);
+    const [visible, setVisible] = useState(true);
+    const [loading, setLoading] = React.useState(false);
     const [user, setUser] = useState({
         name: "",
         email: "",
-        college:"",
-        ph:"",
+        college: "",
+        ph: "",
         password: "",
     });
-    const { name, email, password ,college,ph} = user;
-    const registerSubmit = (e: any) => {
-        e.preventDefault();
-        const myForm = new FormData();
-
-        myForm.set("name", name);
-        myForm.set("email", email);
-        myForm.set("college", college);
-        myForm.set("ph", ph);
-        myForm.set("password", password);
-        // myForm.set("avatar", avatar);
-        console.log("register");
-
+    const { name, email, password, college, ph } = user;
+    const router = useRouter();
+    const registerSubmit = async(e: any) => {
+        try {
+            e.preventDefault();
+            setLoading(true);
+            toast.success('You did it!');
+            console.log(user);
+            const response = await axios.post("/api/user/signup", user);
+            console.log("Login success", response.data);
+            router.push("/profile");
+        } catch (error:any) {
+            console.log("registration failed");
+        } finally{
+        setLoading(false);
+        }
     }
     const registerDataChange = (e: { target: { name: any; value: any; }; }) => {
         setUser({ ...user, [e.target.name]: e.target.value });
@@ -38,45 +57,74 @@ export default function login() {
         if (tab === "login" && switcherTab.current) {
             switcherTab.current.classList.add("shiftToNeutral");
             switcherTab.current.classList.remove("shiftToRight");
-            if (registerTab.current && logintab.current) {
+            if (registerTab.current && logintab.current && logsintab.current) {
                 registerTab.current.classList.remove("shiftToNeutralForm");
                 logintab.current.classList.remove("shiftToLeft");
+                logsintab.current.classList.remove("LoginSignin");
+                logsintab.current.classList.add("LoginSignin_login");
+            }
+            if (login.current && signin.current) {
+                login.current.classList.remove("sign");
+                login.current.classList.add("log");
+                signin.current.classList.remove("log");
+                signin.current.classList.add("sign");
             }
         }
         if (tab === "register" && switcherTab.current) {
             switcherTab.current.classList.add("shiftToRight");
             switcherTab.current.classList.remove("shiftToNeutral");
-    
-            if (registerTab.current && logintab.current) {
+
+            if (registerTab.current && logintab.current && logsintab.current) {
                 registerTab.current.classList.add("shiftToNeutralForm");
                 logintab.current.classList.add("shiftToLeft");
+                logsintab.current.classList.add("LoginSignin");
+                logsintab.current.classList.remove
+                    ("LoginSignin_login");
+            }
+            if (login.current && signin.current) {
+                login.current.classList.remove("log");
+                login.current.classList.add("sign");
+                signin.current.classList.remove("sign");
+                signin.current.classList.add("log");
             }
         }
     }
-    
-    const loginSubmit=(e: { preventDefault: () => void; })=>{
-        console.log("submitted");
-        e.preventDefault();
-    }
 
+    const loginSubmit = async(e: { preventDefault: () => void; }) => {
+        try {
+            console.log("submitted");
+            e.preventDefault();
+            setLoading(true);
+            const response = await axios.post("/api/user/login", user);
+            console.log("Login success", response.data);
+            toast.success("Login success");
+            router.push("/profile");
+        } catch (error:any) {
+            console.log("Login failed", error.message);
+            toast.error(error.message);
+        } finally{
+        setLoading(false);
+        }
+    }
 
     return (
         <Fragment>
-            
+
             <div className="LoginSignUpContainer">
-               
-                <div className="LoginSignin">
-                 
+
+                <div className="LoginSignin_login" ref={logsintab}>
+
                     <div className="head">
                         <div className="login_signup_toggel">
-                            <p onClick={(e) => switchTable(e, "login")}>Login</p>
-                            <p onClick={(e) => switchTable(e, "register")}>Register</p>
+                            <p ref={login} className="log" onClick={(e) => switchTable(e, "login")}>Login</p>
+                            <p ref={signin} className="sign" onClick={(e) => switchTable(e, "register")}>Register</p>
                         </div>
                         <button ref={switcherTab} ></button>
                     </div>
                     <form className="loginForm" ref={logintab} onSubmit={loginSubmit}>
-                        {/* <MailOutlineIcon /> */}
+
                         <div className="loginEmail">
+                            <FontAwesomeIcon icon={faEnvelope} className="icon" />
                             <input
                                 type="email"
                                 placeholder="Email"
@@ -86,9 +134,10 @@ export default function login() {
                             />
                         </div>
                         <div className="loginPassword">
-                            {/* <LockOpenIcon /> */}
+                            <FontAwesomeIcon icon={faKey} className="icon" />
+                            <FontAwesomeIcon onClick={() => setVisible(!visible)} icon={!visible ? faEye : faEyeSlash} className="eyeicon" />
                             <input
-                                type="password"
+                                type={visible ? "password" : "text"}
                                 placeholder="password"
                                 required
                                 value={loginpassword}
@@ -105,19 +154,18 @@ export default function login() {
                         onSubmit={registerSubmit}
                     >
                         <div className="signUpName">
-                            {/* <FaceIcon /> */}
+                            <FontAwesomeIcon icon={faAddressCard} className="icon" />
                             <input
                                 type="text"
                                 placeholder="Name"
                                 required
                                 name="name"
                                 value={name}
-                                // onChange={(e) => setName(e.target.value)}
                                 onChange={registerDataChange}
                             />
                         </div>
                         <div className="signUpEmail">
-                            {/* <MailOutlineIcon /> */}
+                            <FontAwesomeIcon icon={faEnvelope} className="icon" />
                             <input
                                 type="email"
                                 placeholder="Email"
@@ -125,49 +173,50 @@ export default function login() {
                                 name="email"
                                 value={email}
                                 onChange={registerDataChange}
-                                // onChange={(e) => setEmail(e.target.value)}
+
                             />
                         </div>
                         <div className="signUpEmail">
-                            {/* <MailOutlineIcon /> */}
+                            <FontAwesomeIcon icon={faUniversity} className="icon" />
                             <input
                                 type="text"
                                 placeholder="College"
                                 required
-                                name="email"
+                                name="college"
                                 value={college}
                                 onChange={registerDataChange}
-                                // onChange={(e) => setEmail(e.target.value)}
+
                             />
                         </div>
                         <div className="signUpEmail">
-                            {/* <MailOutlineIcon /> */}
+                            <FontAwesomeIcon icon={faPhone} className="icon" />
                             <input
-                                type="number"
+                                type="tel"
                                 placeholder="phone"
                                 required
-                                name="email"
+                                name="ph"
                                 value={ph}
                                 onChange={registerDataChange}
-                                // onChange={(e) => setEmail(e.target.value)}
+                            // onChange={(e) => setEmail(e.target.value)}
                             />
                         </div>
-                           <div className="signUpPassword">
-                            {/* <LockOpenIcon /> */}
+                        <div className="signUpPassword">
+                            <FontAwesomeIcon icon={faKey} className="icon" />
+                            <FontAwesomeIcon onClick={() => setVisible(!visible)} icon={!visible ? faEye : faEyeSlash} className="eyesicon" />
                             <input
-                                type="password"
+                                type={visible ? "password" : "text"}
                                 placeholder="Password"
                                 required
                                 name="password"
                                 value={password}
                                 onChange={registerDataChange}
-                                // onChange={(e) => setPassword(e.target.value)}
+
                             />
-                            </div>
-                            <input type="submit" value="Register" className="signUpBtn" />
+                        </div>
+                        <input type="submit" value="Register" className="signUpBtn" />
                     </form>
                 </div>
-        </div>
+            </div>
         </Fragment >
     )
 }
