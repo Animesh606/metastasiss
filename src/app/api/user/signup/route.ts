@@ -28,7 +28,7 @@ export async function POST(req: NextRequest) {
         if (existUser && existUser.length > 0) {
             return NextResponse.json(
                 { message: "User already exists." },
-                { status: 201 }
+                { status: 400 }
             );
         }
 

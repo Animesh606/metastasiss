@@ -1,7 +1,7 @@
-"use client"
+"use client";
 import React, { Fragment, useEffect, useRef, useState } from "react";
-import Link from 'next/link';
-import "./page.css"
+import Link from "next/link";
+import "./page.css";
 import { faEnvelope } from "@fortawesome/free-regular-svg-icons/faEnvelope";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye } from "@fortawesome/free-solid-svg-icons";
@@ -11,8 +11,8 @@ import { faAddressCard } from "@fortawesome/free-solid-svg-icons";
 import { faPhone } from "@fortawesome/free-solid-svg-icons";
 import { faUniversity } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
-import {useRouter} from "next/navigation";
-import { toast } from 'react-hot-toast';
+import { useRouter } from "next/navigation";
+import { toast } from "react-hot-toast";
 export default function login() {
     const login = useRef<HTMLDivElement | null>(null);
     const signin = useRef<HTMLDivElement | null>(null);
@@ -34,26 +34,38 @@ export default function login() {
     });
     const { name, email, password, college, ph } = user;
     const router = useRouter();
-    const registerSubmit = async(e: any) => {
+    const registerSubmit = async (e: any) => {
         try {
             e.preventDefault();
             setLoading(true);
-            toast.success('You did it!');
-            console.log(user);
-            const response = await axios.post("/api/user/signup", user);
-            console.log("Login success", response.data);
-            router.push("/profile");
-        } catch (error:any) {
-            console.log("registration failed");
-        } finally{
-        setLoading(false);
+            // console.log(user);
+            const response = await axios.post("/api/user/signup", {
+                fullName: name,
+                email,
+                phone: ph,
+                college,
+                password,
+            });
+            if(response.status === 201)
+                toast.success("Sent Verification Mail!");
+        } catch (error: any) {
+            if(error?.response.status === 400)
+                toast.error(`${error.response.data.message}`);
+            else if(error?.response.status === 500)
+                toast.error(`${error.response.data.message}`);
+            else
+                toast.error("Something Went Wrong!\n Please try again");
+        } finally {
+            setLoading(false);
         }
-    }
-    const registerDataChange = (e: { target: { name: any; value: any; }; }) => {
+    };
+    const registerDataChange = (e: { target: { name: any; value: any } }) => {
         setUser({ ...user, [e.target.name]: e.target.value });
     };
-    const switchTable = (e: React.MouseEvent<HTMLParagraphElement, MouseEvent>, tab: string) => {
-        console.log("aka")
+    const switchTable = (
+        e: React.MouseEvent<HTMLParagraphElement, MouseEvent>,
+        tab: string
+    ) => {
         if (tab === "login" && switcherTab.current) {
             switcherTab.current.classList.add("shiftToNeutral");
             switcherTab.current.classList.remove("shiftToRight");
@@ -78,8 +90,7 @@ export default function login() {
                 registerTab.current.classList.add("shiftToNeutralForm");
                 logintab.current.classList.add("shiftToLeft");
                 logsintab.current.classList.add("LoginSignin");
-                logsintab.current.classList.remove
-                    ("LoginSignin_login");
+                logsintab.current.classList.remove("LoginSignin_login");
             }
             if (login.current && signin.current) {
                 login.current.classList.remove("log");
@@ -88,44 +99,66 @@ export default function login() {
                 signin.current.classList.add("log");
             }
         }
-    }
+    };
 
-    const loginSubmit = async(e: { preventDefault: () => void; }) => {
+    const loginSubmit = async (e: { preventDefault: () => void }) => {
         try {
-            console.log("submitted");
             e.preventDefault();
             setLoading(true);
-            console.log({loginemail,loginpassword});
-            const response = await axios.post("/api/user/login", {loginemail,loginpassword});
-            console.log("Login success", response.data);
-            toast.success("Login success");
+            console.log({ loginemail, loginpassword });
+            const response = await axios.post("/api/user/login", {
+                email: loginemail,
+                password: loginpassword
+            });
+            if(response.status === 201)
+                toast.success(response.data.message);
+            // console.log("Login success", response.data);
             router.push("/profile");
-        } catch (error:any) {
-            console.log("Login failed", error.message);
-            toast.error(error.message);
-        } finally{
-        setLoading(false);
+        } catch (error: any) {
+            if(error?.response.status === 400)
+                toast.error(`${error.response.data.message}`);
+            else if(error?.response.status === 500)
+                toast.error(`${error.response.data.message}`);
+            else
+                toast.error("Something Went Wrong!\nPlease try again");
+        } finally {
+            setLoading(false);
         }
-    }
+    };
 
     return (
         <Fragment>
-
             <div className="LoginSignUpContainer">
-
                 <div className="LoginSignin_login" ref={logsintab}>
-
                     <div className="head">
                         <div className="login_signup_toggel">
-                            <p ref={login} className="log" onClick={(e) => switchTable(e, "login")}>Login</p>
-                            <p ref={signin} className="sign" onClick={(e) => switchTable(e, "register")}>Register</p>
+                            <p
+                                ref={login}
+                                className="log"
+                                onClick={(e) => switchTable(e, "login")}
+                            >
+                                Login
+                            </p>
+                            <p
+                                ref={signin}
+                                className="sign"
+                                onClick={(e) => switchTable(e, "register")}
+                            >
+                                Register
+                            </p>
                         </div>
-                        <button ref={switcherTab} ></button>
+                        <button ref={switcherTab}></button>
                     </div>
-                    <form className="loginForm" ref={logintab} onSubmit={loginSubmit}>
-
+                    <form
+                        className="loginForm"
+                        ref={logintab}
+                        onSubmit={loginSubmit}
+                    >
                         <div className="loginEmail">
-                            <FontAwesomeIcon icon={faEnvelope} className="icon" />
+                            <FontAwesomeIcon
+                                icon={faEnvelope}
+                                className="icon"
+                            />
                             <input
                                 type="email"
                                 placeholder="Email"
@@ -136,17 +169,27 @@ export default function login() {
                         </div>
                         <div className="loginPassword">
                             <FontAwesomeIcon icon={faKey} className="icon" />
-                            <FontAwesomeIcon onClick={() => setVisible(!visible)} icon={!visible ? faEye : faEyeSlash} className="eyeicon" />
+                            <FontAwesomeIcon
+                                onClick={() => setVisible(!visible)}
+                                icon={!visible ? faEye : faEyeSlash}
+                                className="eyeicon"
+                            />
                             <input
                                 type={visible ? "password" : "text"}
                                 placeholder="password"
                                 required
                                 value={loginpassword}
-                                onChange={(e) => setLoginpassword(e.target.value)}
+                                onChange={(e) =>
+                                    setLoginpassword(e.target.value)
+                                }
                             />
                         </div>
                         <Link href="/forgotpassword">Forget Password ?</Link>
-                        <input type="submit" value="Login" className="loginBtn" />
+                        <input
+                            type="submit"
+                            value="Login"
+                            className="loginBtn"
+                        />
                     </form>
                     <form
                         className="signUpForm"
@@ -155,7 +198,10 @@ export default function login() {
                         onSubmit={registerSubmit}
                     >
                         <div className="signUpName">
-                            <FontAwesomeIcon icon={faAddressCard} className="icon" />
+                            <FontAwesomeIcon
+                                icon={faAddressCard}
+                                className="icon"
+                            />
                             <input
                                 type="text"
                                 placeholder="Name"
@@ -166,7 +212,10 @@ export default function login() {
                             />
                         </div>
                         <div className="signUpEmail">
-                            <FontAwesomeIcon icon={faEnvelope} className="icon" />
+                            <FontAwesomeIcon
+                                icon={faEnvelope}
+                                className="icon"
+                            />
                             <input
                                 type="email"
                                 placeholder="Email"
@@ -174,11 +223,13 @@ export default function login() {
                                 name="email"
                                 value={email}
                                 onChange={registerDataChange}
-
                             />
                         </div>
                         <div className="signUpEmail">
-                            <FontAwesomeIcon icon={faUniversity} className="icon" />
+                            <FontAwesomeIcon
+                                icon={faUniversity}
+                                className="icon"
+                            />
                             <input
                                 type="text"
                                 placeholder="College"
@@ -186,7 +237,6 @@ export default function login() {
                                 name="college"
                                 value={college}
                                 onChange={registerDataChange}
-
                             />
                         </div>
                         <div className="signUpEmail">
@@ -198,12 +248,16 @@ export default function login() {
                                 name="ph"
                                 value={ph}
                                 onChange={registerDataChange}
-                            // onChange={(e) => setEmail(e.target.value)}
+                                // onChange={(e) => setEmail(e.target.value)}
                             />
                         </div>
                         <div className="signUpPassword">
                             <FontAwesomeIcon icon={faKey} className="icon" />
-                            <FontAwesomeIcon onClick={() => setVisible(!visible)} icon={!visible ? faEye : faEyeSlash} className="eyesicon" />
+                            <FontAwesomeIcon
+                                onClick={() => setVisible(!visible)}
+                                icon={!visible ? faEye : faEyeSlash}
+                                className="eyesicon"
+                            />
                             <input
                                 type={visible ? "password" : "text"}
                                 placeholder="Password"
@@ -211,13 +265,16 @@ export default function login() {
                                 name="password"
                                 value={password}
                                 onChange={registerDataChange}
-
                             />
                         </div>
-                        <input type="submit" value="Register" className="signUpBtn" />
+                        <input
+                            type="submit"
+                            value="Register"
+                            className="signUpBtn"
+                        />
                     </form>
                 </div>
             </div>
-        </Fragment >
-    )
+        </Fragment>
+    );
 }
