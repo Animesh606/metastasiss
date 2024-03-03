@@ -6,8 +6,9 @@
     align-items: center;
     position: fixed;
     z-index: 99;
-    box-shadow: 0 0 20px #000;
-    background: rgba(15, 14, 14, 0.7);
+    font: 500 1.5vmax "Roboto";
+    /* box-shadow: 0 0 20px #000; */
+    /* background: rgba(15, 14, 14, 0.7); */
 }
 .heade .logo{
     /* flex: 1; */

@@ -24,6 +24,9 @@ export const Navbar=()=>{
                 <li><a href="/login" className="loggins">Login</a></li>
     
               </ul>
+              <div>
+                
+              </div>
             </div>
             <div className=" mobile"  onClick={()=>{setHover(!hover)}}> <FontAwesomeIcon icon={faBars} className="icons"/></div>
         </div>

@@ -2,9 +2,13 @@
     margin-top: 0;
     padding: 100px 0 0px 0;
     /* background-image: url('../../../public/background.jpg'); */
+  
+  }
+  .mains{
     background-position: top center;
     background-size: cover;
     background-repeat: no-repeat;
+    background-attachment: fixed;
   }
   .aligh-items-center{
     display: flex;
@@ -15,9 +19,58 @@
      width: 50%;
      
   }
-  .section{
-    min-height: 90vh;
+.banner{
+    min-height: 60vh;
   }
+  .Aboutus{
+    color: #FFFFFF;
+    padding: 0% 5% 5% 5%; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    font-family: "Times New Roman", Times, serif;
+    line-height: 1.6;
+   
+    background-image: linear-gradient(-180deg, rgba(130, 228, 233, 0.5),rgba(25, 69, 71,0.5));
+    margin: 0px 7% 30px 7%;
+    border-radius: 20px;
+    color:#c5c6c7;
+
+  }
+  .Aboutus h1{
+    color:white;
+  }
+  .about{
+    padding-bottom: 20px;
+  }
+h1{
+  background: -webkit-linear-gradient(rgb(130, 228, 233),rgb(25, 69, 71));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;  
+}
+.ecg-container {
+  width: 500px;
+  height: 200px;
+  border: 1px solid #000;
+  position: relative;
+  overflow: hidden;
+}
+
+.ecg-line {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: red;
+  animation: ecgAnimation 2s infinite linear;
+}
+
+@keyframes ecgAnimation {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-100%); }
+}
   .secondi{
     width: 50%;
     background:cover;
@@ -29,6 +82,79 @@
    border-radius: 50%;
     backdrop-filter: blur(10px);
   }
+  .head{
+    padding: 1rem 0rem;
+    color: #c5c6c7;
+  }
+  .rewards{
+    position: relative;
+    margin: auto 6rem;
+    padding: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    user-select: none;
+    -webkit-user-select: none;
+  }
+
+  .rewards .circle{
+    position: absolute;
+    top: -1rem;
+    left: -1rem;
+    width: 3rem;
+    height: 3rem;
+    border-radius: 3rem;
+    background: #52bfb6;
+
+}
+.rewards .circle h1{
+  padding: 1.5rem 0.5rem 0;
+    width: -moz-fit-content;
+    width: fit-content;
+    font-size: 2rem;
+    font-weight: 600;
+}
+.rewards .devider{
+  position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 0.15rem;
+    border-radius: 2px;
+    background:  #52bfb6;
+}
+.prizes .prize{
+  width: 15rem;
+    height: 15rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all .2s ease-in-out;
+}
+.prizes h4{
+  margin: 1rem auto;
+    font-size: 1.3rem;
+    font-weight: 500;
+    color: #f0e9e9;
+    text-align: center;
+    letter-spacing: .4px;
+}
+.prize .Image{
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+.prizes{
+  position: relative;
+    margin: 2rem 0;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+    color: #c5c6c7;
+    font-family: jost, sans-serif;
+}
   .banner h1 {
     color: white;
     font-size: 65px;
@@ -117,6 +243,7 @@ button:hover {
     }
     .secondi{
       width: 100%;
+      backdrop-filter: blur(0px);
     }
     .banner h1{
       color:rgb(45, 183, 190);
@@ -130,6 +257,9 @@ button:hover {
       width: 100%;
       height: 100%;
       animation: waveAnimation 7s linear infinite;
+    }
+    .rewards{
+      margin: auto 3rem;
     }
   }
 @keyframes waveAnimation {

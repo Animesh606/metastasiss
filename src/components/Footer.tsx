@@ -6,6 +6,7 @@ import { faTwitter } from "@fortawesome/free-brands-svg-icons";
 import { faInstagram } from "@fortawesome/free-brands-svg-icons";
 import { faYoutube } from "@fortawesome/free-brands-svg-icons";
 import Link from 'next/link';
+import Image from "next/image";
 export const Footer=()=>{
     return(
         <>
@@ -15,42 +16,39 @@ export const Footer=()=>{
                         <div className="widget1">
                             
                             <div className="logo">
-                                <img src="https://i.ibb.co/vLDyPtM/ak-logo-yellow.png" className="img-fluid" alt=""/>
+                               <h1>Meta-stasiss</h1>
                             </div>
                             <div className="para">
                             <p>
-                                In eu libero ligula. Fusce eget metus lorem, ac viverra
-                                leo. Nullam convallis, arcu vel pellentesque sodales,
-                                nisi est varius diam, ac ultrices sem ante quis sem.
-                                Proin ultricies volutpat sapien.
+                            As a startup program under the supervision of AIIMS Guwahati, we have ambitious plans for the future. In addition to expanding our presence within India, we aim to establish partnerships and collaborations on a global scale. By seeking validation from experts in the field and continually refining our offerings, we aspire to set new standards for Medical education worldwide.
                             </p>
                             </div>
                             <div className="socialLinks">
                                 <ul>
-                                    <li>
+                                    {/* <li>
                                         <a href="#">
                                            <div className="face">
 
                                            <FontAwesomeIcon icon={faFacebook} className="icon" style={{ color:'blueviolet' , fontSize:"40px"}}/>
                                            </div>
                                         </a>
-                                    </li>
-                                    <li>
+                                    </li> */}
+                                    {/* <li>
                                         <a href="#">
                                         <div className="face">
                                         <FontAwesomeIcon icon={faTwitter} className="icon" style={{ fontSize:"40px"}}/>
                                            </div>
                                         </a>
-                                    </li>
+                                    </li> */}
                                     <li>
-                                        <a href="#">
+                                        <a href="https://www.instagram.com/metastasiss.edtech/">
                                         <div className="face">
                                         <FontAwesomeIcon icon={faInstagram} className="icon" style={{color:'pink', fontSize:"40px"}}/>
                                            </div>
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="#">
+                                        <a href="https://www.youtube.com/@Metastasiss.edtech">
                                         <div className="face">
                                         <FontAwesomeIcon icon={faYoutube} className="icon" style={{  color:'red', fontSize:"40px"}}/>
                                            </div>
@@ -66,31 +64,33 @@ export const Footer=()=>{
                                 Latest Events
                             </h5>
                             <div className="media">
-                                <img className="img-fluid" src="https://i.ibb.co/CKNmhMX/blog1.jpg" alt=""/>
+                            <Image className="img-fluid"  src="/vrfooter.png" alt={""} width={150} height={150}></Image>
                                 <div className="media-body d-flex align-self-center">
                                     <div className="content">
                                         <a href="#">
                                             <p>
-                                                   Lorem ipsum dolor, sit amet consectetur adipis
+                                            Step into the future of healthcare with immersive VR gaming
                                             </p>
                                         </a>
                                         <span>
-                                            Dec 20, 2024
+                                           April, 2024
                                         </span>
+                                        
                                     </div>
                                 </div>
                             </div>
                             <div className="media">
-                                <img className="img-fluid" src="https://i.ibb.co/m5yGbdR/blog2.jpg" alt=""/>
+                            <Image className="img-fluid"  src="/quize.jpeg" alt={""} width={150} height={150}></Image>
+                               
                                 <div className ="media-body d-flex align-self-center">
                                     <div className="content">
                                         <a href="#">
                                             <p>
-                                            Lorem ipsum dolor, sit amet consectetur adipis
+                                            Join us in the ultimate quest for wisdom and glory.
                                             </p>
                                         </a>
                                         <span>
-                                        Dec 10, 2024
+                                        April, 2024
                                         </span>
                                     </div>
                                 </div>
@@ -104,7 +104,7 @@ export const Footer=()=>{
                             </h5>
                             <ul>
                                 <li>
-                                    <Link href="/"> Home</Link>
+                                    <Link href="/home"> Home</Link>
                                 </li>
                                 <li>
                                 <Link href="/about"> About</Link>
@@ -113,7 +113,7 @@ export const Footer=()=>{
                                 <Link href="/login"> Register</Link>
                                 </li>
                                 <li>
-                                <Link href="/career"> Events</Link>
+                                <Link href="/events"> Events</Link>
                                 </li>
                             </ul>
                         </div>
@@ -123,7 +123,8 @@ export const Footer=()=>{
                             <h5>
                                 Address
                             </h5>
-                            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Deserunt, sunt? Placeat mollitia harum maxime cupiditate nostrum voluptatum perspiciatis molestiae, quisquam magni esse, similique quasi soluta facere! Itaque quas libero corporis.</p>
+                            <p>Silbharal, Changsari,
+Guwahati,Assam 781101.</p>
                         </div>
                     </div>
                 </div>
@@ -131,7 +132,7 @@ export const Footer=()=>{
                 <div className="container">
                     <div className="row">
                         <div className="col-12 text-center">
-                            <p>&copy; Copyright All rights reserved 2023.</p>
+                            <p> Copyright &copy; 2024 AIIMS Guwahati . All rights reserved 2023.</p>
                         </div>
                     </div>
                 </div>
