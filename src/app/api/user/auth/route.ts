@@ -3,9 +3,9 @@ import { NextResponse } from "next/server";
 
 export function GET() {
     try {
-        const { email, fullName } = verifyJWT();
+        const token = verifyJWT();
         return NextResponse.json(
-            { message: "User Found", user: { email, fullName } },
+            { message: "User Found", user: token },
             { status: 200 }
         );
     } catch (error) {
