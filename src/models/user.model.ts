@@ -75,7 +75,7 @@ userSchema.methods.generateForgotPasswordToken = async function() {
 
 userSchema.methods.generateAccessToken = function() {
     return jwt.sign(
-        { _id: this._id, fullName: this._fullName, email: this.email },
+        { _id: this._id, fullName: this.fullName, email: this.email },
         `${process.env.SECRET_KEY}`
     );
 };

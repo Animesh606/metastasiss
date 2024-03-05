@@ -38,7 +38,6 @@ export default function login() {
         try {
             e.preventDefault();
             setLoading(true);
-            // console.log(user);
             const response = await axios.post("/api/user/signup", {
                 fullName: name,
                 email,
@@ -112,8 +111,7 @@ export default function login() {
             });
             if(response.status === 201)
                 toast.success(response.data.message);
-            // console.log("Login success", response.data);
-            router.push("/profile");
+            window.location.href=process.env.NEXT_PUBLIC_DOMAIN_NAME!;
         } catch (error: any) {
             if(error?.response.status === 400)
                 toast.error(`${error.response.data.message}`);

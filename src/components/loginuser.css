@@ -121,7 +121,6 @@
   
   .dropdownItem a{
     color: rgb(215, 218, 221);
-    max-width: 100px;
     margin-left: 10px;
     transition: var(--speed);
     font : 400 1.7vmax "roboto";
