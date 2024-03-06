@@ -2,6 +2,7 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import { Analytics } from "@vercel/analytics/react"
 import { Navbar } from "@/components/Navbar";
 import { config } from "@fortawesome/fontawesome-svg-core";
 import "@fortawesome/fontawesome-svg-core/styles.css";
@@ -32,6 +33,7 @@ export default async function RootLayout({
                     <Toaster position="bottom-center" />
                     {children}
                     <SpeedInsights />
+                    <Analytics />
                 </body>
             </SessionProvider>
         </html>
