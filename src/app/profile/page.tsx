@@ -23,9 +23,8 @@ export default function profile() {
         const getUserData = async () => {
             try {
                 if (status === "authenticated" && data.user) {
-                    console.log(data.user);
-                    // @ts-ignore
                     const resp = await axios.get(
+                        // @ts-ignore
                         `/api/user/profile?userId=${data?.user?._id}`
                     );
                     if (resp.status === 200) {
