@@ -1,41 +1,72 @@
-"use client"
-import React from "react"
-import Link from "next/link"
-import "./page.css"
+"use client";
+import React, { useEffect, useState } from "react";
+import "./page.css";
+import axios from "axios";
+import { useSession } from "next-auth/react";
+import toast from "react-hot-toast";
+
+interface User {
+    fullName: string;
+    email: string;
+    phone: string;
+    college: string;
+    mode: string;
+    transactionId?: string;
+    transactionVerified: boolean;
+    isAdmin: boolean;
+}
+
 export default function profile() {
+    const [user, setUser] = useState<User | null>(null);
+    const { data, status } = useSession();
+    useEffect(() => {
+        const getUserData = async () => {
+            try {
+                if (status === "authenticated" && data.user) {
+                    const resp = await axios.get(
+                        // @ts-ignore
+                        `/api/user/profile?userId=${data?.user?._id}`
+                    );
+                    if (resp.status === 200) {
+                        setUser(resp.data.user);
+                    }
+                }
+            } catch (error: any) {
+                toast.error(error.response.data.message);
+            }
+        };
+        getUserData();
+    }, [status]);
     return (
         <div className="profileContainers">
             <div className="profileContainer">
                 <div>
                     <h1>My Profile</h1>
                     <img src="/snacks.png" alt="akas" />
-                    <p>Akash Mondal</p>
-
+                    <p>{user?.fullName}</p>
                 </div>
                 <div>
-                  
                     <div>
                         <h4>Email</h4>
-                        <p>akashramnagar</p>
+                        <p>{user?.email}</p>
                     </div>
                     <div>
                         <h4>College</h4>
-                        <p>jgec</p>
+                        <p>{user?.college}</p>
                     </div>
                     <div>
                         <h4>Phone</h4>
-                        <p>7001871073</p>
+                        <p>{user?.phone}</p>
                     </div>
                     <div>
                         <h4>Role</h4>
-                        <p>participant</p>
+                        <p>{user?.isAdmin ? "Admin" : "user"}</p>
                     </div>
-
                 </div>
             </div>
             {/* <div className="secondpart">
                 <Link href="/myorders">My Events</Link> */}
             {/* </div> */}
         </div>
-    )
-} 
+    );
+}
