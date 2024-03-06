@@ -43,9 +43,6 @@ export default function profile() {
                 <div>
                     <h1>My Profile</h1>
                     <img src="/avatar.png" alt="akas" />
-                    <p>Akash Mondal</p>
-
-                    <img src="/snacks.png" alt="akas" />
                     <p>{user?.fullName}</p>
                 </div>
                 <div>
