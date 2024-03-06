@@ -1,8 +1,17 @@
 import { cookies } from "next/headers";
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
+import validOrigin from "@/utils/apiRequestOrigin";
 
-export function POST() {
+export function POST(req: NextRequest) {
     try {
+        // Check if refer from frontend
+        if(!validOrigin(req)) {
+            return NextResponse.json(
+                { message: "Invalid request origin" },
+                { status: 401 }
+            );
+        }
+
         // Delete accessToken from cookie
         cookies().delete("access_token");
 
