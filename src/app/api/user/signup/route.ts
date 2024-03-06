@@ -1,6 +1,7 @@
 import User from "@/models/user.model";
 import connectDB from "@/utils/db.connect";
 import sendEmail from "@/utils/mailer";
+import validOrigin from "@/utils/apiRequestOrigin";
 import { NextRequest, NextResponse } from "next/server";
 
 interface userDetails {
@@ -13,6 +14,14 @@ interface userDetails {
 
 export async function POST(req: NextRequest) {
     try {
+        // Check if refer from frontend
+        if(!validOrigin(req)) {
+            return NextResponse.json(
+                { message: "Invalid request origin" },
+                { status: 401 }
+            );
+        }
+        
         // Connect database
         await connectDB();
 
