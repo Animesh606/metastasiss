@@ -6,8 +6,11 @@ import Image from "next/image";
 import "./page.css"
 import { Footer } from "@/components/Footer"
 import Loader from "@/components/Loader";
-import router, { Router } from "next/router";
+import  { useRouter } from "next/navigation";
+import { useSession } from "next-auth/react";
 export default function Home() {
+  const {status}=useSession();
+  const router=useRouter();
   const toRotate = ["Metastasiss"];
   const period = 2000;
   const [loading, setLoading] = useState(true);
@@ -17,6 +20,7 @@ export default function Home() {
     }, 2000);
     return () => clearTimeout(timer);
   }, []);
+
   return (
     <>
       {loading ? (
@@ -29,7 +33,7 @@ export default function Home() {
                 <div  className="firsti">
                         <h1 data-aos="zoom-in"><span className="txt-rotate"  ><span  className="wrap">Meta-Stasiss</span></span></h1>
                         <p><strong> Revolutionize the way Medical Science is taught and learned. We are dedicated to leveraging innovative technologies and gamification strategies to simplify complex physiological concepts, making them more accessible and engaging to learners of all backgrounds.</strong></p>
-                        <button onClick={() => router.push("/login")}><span>Let&apos;s connect</span> </button>
+                        <button onClick={() =>router.push(status==="authenticated"?"/even":"/login")}><span>Let&apos;s connect</span> </button>
                 </div>
                 <div  className="secondi" >
                   <Image className="Image" src="/vr2.png" alt={""} width={150} height={150}></Image>
