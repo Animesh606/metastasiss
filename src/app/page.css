@@ -2,6 +2,11 @@
     margin-top: 0;
     padding: 100px 0 0px 0;
   }
+  .banner h1{
+   background: -webkit-linear-gradient(rgb(130, 228, 233),rgb(25, 69, 71));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;   
+  }
   .mains{
     background-position: top center;
     background-size: cover;
@@ -16,6 +21,12 @@
   .firsti{
      width: 50%;
      
+  }
+  .firsti{
+    width: 50%;
+ }
+  .headdd h1{
+    color:white;
   }
 .banner{
     min-height: 60vh;
@@ -42,11 +53,7 @@
   .about{
     padding-bottom: 20px;
   }
-h1{
-  background: -webkit-linear-gradient(rgb(130, 228, 233),rgb(25, 69, 71));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;  
-}
+
 .ecg-container {
   width: 500px;
   height: 200px;

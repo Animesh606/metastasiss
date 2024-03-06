@@ -1,5 +1,3 @@
-
-
 "use client"
 import React from "react";
 import { useState, useEffect } from "react";
@@ -29,14 +27,10 @@ export default function Home() {
             <div>
               <div className="aligh-items-center">
                 <div  className="firsti">
-                  
-                     
-                        <h1 data-aos="zoom-in"><span className="txt-rotate"  ><span  className="wrap">Meta-stasiss</span></span></h1>
-                        <p>Revolutionize the way Medical Science is taught and learned. We are dedicated to leveraging innovative technologies and gamification strategies to simplify complex physiological concepts, making them more accessible and engaging to learners of all backgrounds.</p>
+                        <h1 data-aos="zoom-in"><span className="txt-rotate"  ><span  className="wrap">Meta-Stasiss</span></span></h1>
+                        <p><strong> Revolutionize the way Medical Science is taught and learned. We are dedicated to leveraging innovative technologies and gamification strategies to simplify complex physiological concepts, making them more accessible and engaging to learners of all backgrounds.</strong></p>
                         <button onClick={() => router.push("/login")}><span>Let&apos;s connect</span> </button>
-                
                 </div>
-
                 <div  className="secondi" >
                   <Image className="Image" src="/vr2.png" alt={""} width={150} height={150}></Image>
                 </div>
@@ -44,24 +38,22 @@ export default function Home() {
             </div>
           </section>
           <div className="Aboutus">
-            <div className="head">
-              <h1>About Us</h1>
+            <div className="headdd">
+              <h1>Gameysio-2024</h1>
             </div>
             <div className="about">
-              <p>Our purpose is to make Medical education more effective, efficient, and enjoyable. Through the use of cutting-edge tools and methodologies, we aim to bridge the gap between theory and practice, empowering students to grasp intricate physiological processes with ease and confidence.
-              We believe in pushing the boundaries of educational technology to enhance the learning experience. One of our flagship initiatives involves the integration of virtual reality (VR) technology into physiology concepts. By immersing students in lifelike simulations and interactive experiences, we transform abstract concepts into tangible, memorable lessons.
-              What sets METASTASISS apart is our commitment to innovation and our relentless pursuit of excellence in education. While traditional approaches to physiology education often rely on static images or passive learning methods, we embrace technology-driven solutions that bring concepts to life in ways never before possible.
-              While our primary audience consists of students and professionals in the medical and healthcare fields, our educational resources are designed to benefit anyone with an interest in physiology. Whether you&apos;re a high school student, a medical student, or a lifelong learner, METASTASISS is here to support your educational journey.
-              </p>
+              <p>Welcome to Gameysio-2024, the ultimate gamification of physiology event at AIIMS Guwahati! Get ready for a unique blend of knowledge and entertainment as we transform the study of human
+                 physiology into an exhilarating and competitive experience. Join us for interactive quizzes, simulated scenarios, and a dynamic atmosphere that promises not just learning but an unforgettable journey into the intricate world of physiology.
+                 Embrace the thrill, challenge your peers, and discover the joy of unraveling the mysteries of the human body at Gameysio-2024! See you there for an experience like never before.</p>
             </div>
           </div>
           <div className="rewards">
             <span className="circle">
             </span>
-            <h1 className="font-bold"> Rewards</h1>
+            {/* <h1 className="font-bold"> Rewards</h1> */}
             <span className="devider"></span>
           </div>
-          <div  className="prizes">
+          {/* <div  className="prizes">
           <div data-aos="flip-right">
             <div className="prize">
             <Image className="Image" src="/snacks.png" alt={""} width={150} height={150}></Image>
@@ -81,7 +73,7 @@ export default function Home() {
             </div>
             <h4>Verified certificates</h4>
             </div>
-          </div>
+          </div> */}
           <Footer />
         </div>
       )}
