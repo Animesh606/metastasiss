@@ -16,7 +16,7 @@ interface User {
     isAdmin: boolean;
 }
 
-export default function profile() {
+export default function Profile() {
     const [user, setUser] = useState<User | null>(null);
     const { data, status } = useSession();
     useEffect(() => {

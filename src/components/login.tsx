@@ -16,7 +16,7 @@ import { toast } from "react-hot-toast";
 import { getServerSession } from "next-auth";
 import { signIn } from "next-auth/react";
 import router from "next/router";
-export default function login() {
+export default function Login() {
     const login = useRef<HTMLDivElement | null>(null);
     const signin = useRef<HTMLDivElement | null>(null);
     const logsintab = useRef<HTMLDivElement | null>(null);
