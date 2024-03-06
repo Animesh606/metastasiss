@@ -37,7 +37,7 @@ export default function Home() {
                      
                         <h1 data-aos="zoom-in"><span className="txt-rotate"  ><span  className="wrap">Meta-stasiss</span></span></h1>
                         <p>Revolutionize the way Medical Science is taught and learned. We are dedicated to leveraging innovative technologies and gamification strategies to simplify complex physiological concepts, making them more accessible and engaging to learners of all backgrounds.</p>
-                        <button onClick={() => console.log('connect')}><span>Let's connect</span> </button>
+                        <button onClick={() => console.log('connect')}><span>Let&apos;s connect</span> </button>
                 
                 </div>
 
@@ -55,7 +55,7 @@ export default function Home() {
               <p>Our purpose is to make Medical education more effective, efficient, and enjoyable. Through the use of cutting-edge tools and methodologies, we aim to bridge the gap between theory and practice, empowering students to grasp intricate physiological processes with ease and confidence.
               We believe in pushing the boundaries of educational technology to enhance the learning experience. One of our flagship initiatives involves the integration of virtual reality (VR) technology into physiology concepts. By immersing students in lifelike simulations and interactive experiences, we transform abstract concepts into tangible, memorable lessons.
               What sets METASTASISS apart is our commitment to innovation and our relentless pursuit of excellence in education. While traditional approaches to physiology education often rely on static images or passive learning methods, we embrace technology-driven solutions that bring concepts to life in ways never before possible.
-              While our primary audience consists of students and professionals in the medical and healthcare fields, our educational resources are designed to benefit anyone with an interest in physiology. Whether you're a high school student, a medical student, or a lifelong learner, METASTASISS is here to support your educational journey.
+              While our primary audience consists of students and professionals in the medical and healthcare fields, our educational resources are designed to benefit anyone with an interest in physiology. Whether you&apos;re a high school student, a medical student, or a lifelong learner, METASTASISS is here to support your educational journey.
               </p>
             </div>
           </div>
