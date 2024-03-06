@@ -6,37 +6,12 @@ import { faBars } from "@fortawesome/free-solid-svg-icons";
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import { LoggedinUser } from "./loginuser";
-// import axios from "axios";
 import { useSession } from "next-auth/react";
-
-// interface User {
-//     // Define the properties of the user object
-//     email: string;
-//     name: string;
-//     role: string;
-// }
 
 export const Navbar = () => {
     const [hover, setHover] = useState(false);
-    // const [loggedin, setLoggedIn] = useState(false);
-    // const [user, setUser] = useState<User | null>(null);
     const { status } = useSession();
-    // useEffect(() => {
-    //     const getUser = async () => {
-    //         try {
-    //             const response = await axios.get("/api/user/auth");
-    //             if (response.data) {
-    //                 setLoggedIn(true);
-    //                 const { email, fullName } = response.data.user;
-    //                 setUser({ email, name: fullName, role: "user" });
-    //             }
-    //         } catch (error) {
-    //             console.log("Error getting user data", error);
-    //             setLoggedIn(false);
-    //         }
-    //     };
-    //     getUser();
-    // }, [loggedin]);
+    console.log(status)
     return (
         <>
             <div className="heade">
@@ -86,5 +61,5 @@ export const Navbar = () => {
             </div>
             <LoggedinUser/>
         </>
-    );
+    ); 
 };
