@@ -11,7 +11,7 @@ const userRegistrationSuccessMail = ({ fullName }: mailInfo) => {
     <body style="font-family: Arial, sans-serif; background-image: url('https://www.metastasiss.co.in/_next/image?url=%2FMetastasis.png&w=128&q=75'); background-size: cover; background-position: center; color: #333; padding: 20px; margin: 0;">
     
     <div style="max-width: 600px; margin: 0 auto; padding: 20px; background-color: rgba(255, 255, 255, 0.9); border-radius: 8px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);">
-      <h1 style="color: #008080;">Welcome to Metastasis Platform!</h1>
+      <h1 style="color: #008080;">Welcome to Meta-stasiss Platform!</h1>
       
       <p>Hi ${fullName},</p>
       

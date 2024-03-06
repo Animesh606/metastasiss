@@ -16,6 +16,7 @@ import { toast } from "react-hot-toast";
 import { getServerSession } from "next-auth";
 import { signIn } from "next-auth/react";
 import router from "next/router";
+import Loader from "./Loader";
 export default function Login() {
     const login = useRef<HTMLDivElement | null>(null);
     const signin = useRef<HTMLDivElement | null>(null);
@@ -40,11 +41,11 @@ export default function Login() {
             e.preventDefault();
             setLoading(true);
             const response = await axios.post("/api/user/signup", {
-                fullName: name,
-                email,
-                phone: ph,
-                college,
-                password,
+                fullName: name.trim(),
+                email: email.trim(),
+                phone: ph.trim(),
+                college: college.trim(),
+                password: password.trim(),
             });
             if(response.status === 201){
                 toast.success("Sent Verification Mail!");
@@ -119,7 +120,9 @@ export default function Login() {
               console.log(response);
             // if(response.status === 201)
             //     toast.success(response.data.message);
-            window.location.href=process.env.NEXT_PUBLIC_DOMAIN_NAME!;
+            // window.location.href=process.env.NEXT_PUBLIC_DOMAIN_NAME!;
+            toast.success("Successfully logged in");
+            router.push("/");
         } catch (error: any) {
             if(error?.response.status === 400)
                 toast.error(`${error.response.data.message}`);
@@ -131,7 +134,7 @@ export default function Login() {
             setLoading(false);
         }
     };
-
+     if(loading) return(<Loader/>)
     return (
         <Fragment>
             <div className="LoginSignUpContainer">

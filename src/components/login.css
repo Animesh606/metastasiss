@@ -133,7 +133,7 @@
   box-sizing: border-box;
   border: 1px solid rgba(0, 0, 0, 0.267);
   border-radius: 4px;
-  font: 300 0.9vmax cursive;
+  font: 300 1.5vmax cursive;
   outline: none;
 }
 
@@ -241,7 +241,7 @@
   }
 
   .LoginSignin_login {
-    width: 35vh;
+    width: 40vh;
     height: 45vh;
   }
 
@@ -256,14 +256,14 @@
 
   .loginForm>div>input,
   .signUpForm>div>input {
-    height: 30px;
+    height: 40px;
     padding: 2vmax 4vmax;
     padding-right: 1vmax;
     width: 100%;
     box-sizing: border-box;
     border: 1px solid rgba(0, 0, 0, 0.267);
     border-radius: 4px;
-    font: 400 1.2vmax cursive;
+    font: 400 1.9vmax cursive;
     outline: none;
   }
 
@@ -327,13 +327,13 @@
 
     left: 25px;
     color: #999;
-    font-size: 15px;
+    font-size: 19px;
   }
 
   @media screen and (max-width: 300px) {
     .icon {
       color: #999;
-      font-size: 15px;
+      font-size: 19px;
     }
   }
 
@@ -342,7 +342,7 @@
       position: absolute;
       color: #999;
       left: 20px;
-      font-size: 15px;
+      font-size: 19px;
     }
 
     .eyeicon {
