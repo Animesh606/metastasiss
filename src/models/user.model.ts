@@ -39,6 +39,10 @@ const userSchema = new mongoose.Schema(
             type: Boolean,
             default: false
         },
+        participations: [{
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "Team"
+        }],
         profileImage: String,
         verificationToken: String,
         forgetPasswordToken: String
