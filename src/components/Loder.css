@@ -5,6 +5,7 @@
     justify-content: center;
     align-items: center;
     min-height: 100vh;
+    background-color: rgba(21, 20, 20, 0.5);
   }
   .rings{
     position: absolute;
