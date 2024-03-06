@@ -6,7 +6,7 @@ import Loader from "@/components/Loader";
 import { toast } from "react-hot-toast";
 import { useRouter } from "next/navigation";
 import "./page.css"
-export default function verifyEmail() {
+export default function VerifyEmail() {
     const router = useRouter();
     const searchParams = useSearchParams();
     const [iserror, setIsError] = useState(false);

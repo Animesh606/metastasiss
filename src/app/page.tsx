@@ -8,7 +8,7 @@ import Image from "next/image";
 import "./page.css"
 import { Footer } from "@/components/Footer"
 import Loader from "@/components/Loader";
-export default function home() {
+export default function Home() {
   const [loopNum, setLoopNum] = useState(0);
   const [isDeleting, setIsDeleting] = useState(false);
   const [text, setText] = useState('');

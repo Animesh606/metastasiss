@@ -15,6 +15,7 @@ import { redirect, useRouter } from "next/navigation";
 import { toast } from "react-hot-toast";
 import { getServerSession } from "next-auth";
 import { signIn } from "next-auth/react";
+import router from "next/router";
 export default function login() {
     const login = useRef<HTMLDivElement | null>(null);
     const signin = useRef<HTMLDivElement | null>(null);
