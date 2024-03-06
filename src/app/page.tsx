@@ -42,7 +42,7 @@ export default function home() {
                 </div>
 
                 <div  className="secondi" >
-                  <Image className="Image" src="/vr.png" alt={""} width={150} height={150}></Image>
+                  <Image className="Image" src="/vr2.png" alt={""} width={150} height={150}></Image>
                 </div>
               </div>
             </div>

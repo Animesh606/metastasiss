@@ -1,8 +1,6 @@
 "use client"
 import "./Footer.css"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faFacebook } from "@fortawesome/free-brands-svg-icons/faFacebook";
-import { faTwitter } from "@fortawesome/free-brands-svg-icons";
 import { faInstagram } from "@fortawesome/free-brands-svg-icons";
 import { faYoutube } from "@fortawesome/free-brands-svg-icons";
 import Link from 'next/link';
@@ -15,7 +13,7 @@ export const Footer=()=>{
                     <div className="first">
                         <div className="widget1">
                             
-                            <div className="logo">
+                            <div className="logos">
                                <h1>Meta-stasiss</h1>
                             </div>
                             <div className="para">

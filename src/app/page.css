@@ -1,8 +1,6 @@
 .banner {
     margin-top: 0;
     padding: 100px 0 0px 0;
-    /* background-image: url('../../../public/background.jpg'); */
-  
   }
   .mains{
     background-position: top center;
@@ -80,7 +78,7 @@ h1{
     align-items: center;
     justify-content: center;
    border-radius: 50%;
-    backdrop-filter: blur(10px);
+   transform: translateY(-60px);
   }
   .head{
     padding: 1rem 0rem;
@@ -207,8 +205,8 @@ button:hover {
   
 }
   .banner img {
-    width: 100%;
-    height: 100%;
+    width: 110%;
+    height: 110%;
     /* rotate: ; */
     animation: updown 3s linear infinite;
 
@@ -243,7 +241,7 @@ button:hover {
     }
     .secondi{
       width: 100%;
-      backdrop-filter: blur(0px);
+      transform: translateY(0px);
     }
     .banner h1{
       color:rgb(45, 183, 190);

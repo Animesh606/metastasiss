@@ -11,7 +11,6 @@ import axios from "axios";
 import toast from "react-hot-toast";
 import { signOut, useSession } from "next-auth/react";
 interface User {
-    // Define the properties of the user object
     email: string;
     name: string;
     role: string;
@@ -89,7 +88,7 @@ export const LoggedinUser = () => {
                     >
                         <Image
                             className="Image"
-                            src="/snacks.png"
+                            src="/avatar.png"
                             alt={""}
                             width={150}
                             height={150}
@@ -131,8 +130,6 @@ function DropdownItem(props: {
     fun: React.MouseEventHandler<HTMLLIElement> | undefined;
     img:
         | string
-        | number
-        | boolean
         | React.ReactElement<any, string | React.JSXElementConstructor<any>>
         | Iterable<React.ReactNode>
         | React.ReactPortal

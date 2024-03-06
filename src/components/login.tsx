@@ -45,8 +45,10 @@ export default function login() {
                 college,
                 password,
             });
-            if(response.status === 201)
+            if(response.status === 201){
                 toast.success("Sent Verification Mail!");
+                router.push("/");
+            }
         } catch (error: any) {
             if(error?.response.status === 400)
                 toast.error(`${error.response.data.message}`);
@@ -154,6 +156,7 @@ export default function login() {
                     </div>
                     <form
                         className="loginForm"
+                        // @ts-ignore
                         ref={logintab}
                         onSubmit={loginSubmit}
                     >
@@ -196,6 +199,7 @@ export default function login() {
                     </form>
                     <form
                         className="signUpForm"
+                            // @ts-ignore
                         ref={registerTab}
                         encType="multipart/form-data"
                         onSubmit={registerSubmit}
