@@ -7,8 +7,6 @@ import { faUser } from "@fortawesome/free-solid-svg-icons";
 import { faSignOut } from "@fortawesome/free-solid-svg-icons";
 import { faDashboard } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import axios from "axios";
-import toast from "react-hot-toast";
 import { signOut, useSession } from "next-auth/react";
 interface User {
     email: string;
@@ -57,20 +55,10 @@ export const LoggedinUser = () => {
     //     });
     // }
     function account() {
+        console.log("myprofile")
         router.push("/profile");
     }
     async function logout() {
-        // try {
-        //     const response = await axios.post("/api/user/logout");
-        //     if (response.status === 200) {
-        //         toast.success(response.data.message);
-        //     }
-        //     setLoggedIn(false);
-        // } catch (error: any) {
-        //     toast.error(error.response.data.message);
-        // } finally {
-        //     router.push("/");
-        // }
         signOut({ callbackUrl: "/" });
     }
     function dashboard() {
