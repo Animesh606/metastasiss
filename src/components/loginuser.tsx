@@ -9,6 +9,7 @@ import { faDashboard } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from "axios";
 import toast from "react-hot-toast";
+import { signOut, useSession } from "next-auth/react";
 interface User {
     // Define the properties of the user object
     email: string;
@@ -16,9 +17,9 @@ interface User {
     role: string;
 }
 
-export const LoggedinUser = ({loggedin, setLoggedIn, user}: any) => {
+export const LoggedinUser = () => {
     const router = useRouter();
-    
+    const { data, status } = useSession();
     const [open, setOpen] = useState(false);
     let menuRef = useRef<HTMLDivElement>(null);
     
@@ -60,24 +61,25 @@ export const LoggedinUser = ({loggedin, setLoggedIn, user}: any) => {
         router.push("/profile");
     }
     async function logout() {
-        try {
-            const response = await axios.post("/api/user/logout");
-            if (response.status === 200) {
-                toast.success(response.data.message);
-            }
-            setLoggedIn(false);
-        } catch (error: any) {
-            toast.error(error.response.data.message);
-        } finally {
-            router.push("/");
-        }
+        // try {
+        //     const response = await axios.post("/api/user/logout");
+        //     if (response.status === 200) {
+        //         toast.success(response.data.message);
+        //     }
+        //     setLoggedIn(false);
+        // } catch (error: any) {
+        //     toast.error(error.response.data.message);
+        // } finally {
+        //     router.push("/");
+        // }
+        signOut({ callbackUrl: "/" });
     }
     function dashboard() {
         router.push("/dashboard");
     }
     return (
         <Fragment>
-            <div className="App" style={{display: loggedin ? "block" : "none"}}>
+            <div className="App" style={{display: (status === "authenticated") ? "block" : "none"}}>
                 <div className="menu-container" ref={menuRef}>
                     <div
                         className="menu-trigger"
@@ -101,7 +103,7 @@ export const LoggedinUser = ({loggedin, setLoggedIn, user}: any) => {
                         }`}
                     >
                         <h3>
-                            {user?.name}
+                            {data?.user?.name}
                             <br />
                             <span></span>
                         </h3>
