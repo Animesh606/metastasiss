@@ -1,0 +1,17 @@
+.verifyEmail{
+    display: flex;
+    height: 100vh;
+    width: 100%;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    font: 400 1.5rem "roboto";
+    color: rgb(86, 84, 84);
+}
+
+@media (max-width:100px)
+{
+   .verifyEmail{
+    font: 400 1.2rem "roboto";
+   }
+}

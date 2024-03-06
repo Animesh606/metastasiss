@@ -47,7 +47,7 @@ export async function POST(req: NextRequest) {
         const hashedToken = await user.generateVerificationToken();
 
         // Send email verification mail to user
-        await sendEmail("verifyEmail", {
+        await sendEmail("verifyEmail" , {
             email,
             fullName,
             url: `${process.env.DOMAIN_NAME}/verifyEmail?token=${hashedToken}`,
