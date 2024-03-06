@@ -8,12 +8,8 @@ import Image from "next/image";
 import "./page.css"
 import { Footer } from "@/components/Footer"
 import Loader from "@/components/Loader";
+import router, { Router } from "next/router";
 export default function Home() {
-  const [loopNum, setLoopNum] = useState(0);
-  const [isDeleting, setIsDeleting] = useState(false);
-  const [text, setText] = useState('');
-  const [delta, setDelta] = useState(300 - Math.random() * 100);
-  const [index, setIndex] = useState(1);
   const toRotate = ["Metastasiss"];
   const period = 2000;
   const [loading, setLoading] = useState(true);
@@ -37,7 +33,7 @@ export default function Home() {
                      
                         <h1 data-aos="zoom-in"><span className="txt-rotate"  ><span  className="wrap">Meta-stasiss</span></span></h1>
                         <p>Revolutionize the way Medical Science is taught and learned. We are dedicated to leveraging innovative technologies and gamification strategies to simplify complex physiological concepts, making them more accessible and engaging to learners of all backgrounds.</p>
-                        <button onClick={() => console.log('connect')}><span>Let&apos;s connect</span> </button>
+                        <button onClick={() => router.push("/login")}><span>Let&apos;s connect</span> </button>
                 
                 </div>
 
