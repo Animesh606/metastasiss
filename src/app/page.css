@@ -38,7 +38,7 @@
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    font-family: "Times New Roman", Times, serif;
+    font-family: "sans-serif",serif;
     line-height: 1.6;
    
     background-image: linear-gradient(-180deg, rgba(130, 228, 233, 0.5),rgba(25, 69, 71,0.5));
@@ -158,7 +158,7 @@
     align-items: center;
     flex-wrap: wrap;
     color: #c5c6c7;
-    font-family: jost, sans-serif;
+    font-family:  sans-serif;
 }
   .banner h1 {
     color: white;
@@ -185,7 +185,7 @@
   color: #FFFFFF;
   cursor: pointer;
   display: inline-block;
-  font-family: Inter,-apple-system,system-ui,Roboto,"Helvetica Neue",Arial,sans-serif;
+  /* font-family: Inter,-apple-system,sans-serif,system-ui,Roboto,"Helvetica Neue",Arial,sans-serif; */
   /* height: 40px; */
   line-height: 40px;
   outline: 0;
