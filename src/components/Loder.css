@@ -1,11 +1,10 @@
-
-  .centers{
+ .centers{
     display: flex;
     text-align: center;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    background-color: rgba(21, 20, 20, 0.5);
+    background-color: black;
   }
   .rings{
     position: absolute;
@@ -17,16 +16,24 @@
   @keyframes ringgg {
     0%{
       transform: rotate(0deg);
-      box-shadow: 1px 5px 2px #e65c00;
+      box-shadow: 1px 5px 2px #721096;
     }
     50%{
       transform: rotate(180deg);
-      box-shadow: 1px 5px 2px #18b201;
+      box-shadow: 1px 5px 2px #075c7e;
     }
     100%{
       transform: rotate(360deg);
       box-shadow: 1px 5px 2px #0456c8;
     }
+  }
+  .Images{
+    width: 200px;
+    height: 200px;
+  }
+  .img{
+    width: 400px;
+    height: 400px;
   }
   .rings:before{
     position: absolute;
@@ -36,16 +43,16 @@
     height: 100%;
     width: 100%;
     border-radius: 50%;
-    box-shadow: 0 0 5px rgba(255,255,255,.3);
+    box-shadow: 0 0 5px rgba(12, 4, 4, 0.3);
   }
-  .centers span{
+  /* .centers span{
     color: #c1b6b6;
     font-size: 20px;
     text-transform: uppercase;
     letter-spacing: 1px;
     line-height: 200px;
     animation: textt 3s ease-in-out infinite;
-  }
+  } */
   @keyframes textt {
     50%{
       color: rgb(92, 228, 201);

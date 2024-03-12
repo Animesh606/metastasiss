@@ -28,16 +28,16 @@ export const Navbar = () => {
                 </div>
                 <div className="links">
                     <ul  className={` ${hover ? "navactive" : "nav"}`}>
-                        <li>
+                        <li className="rest">
                             <a href="/">Home</a>
                         </li>
-                        <li>
+                        <li className="rest">
                             <a href="/about">About us</a>
-                        </li>
-                        <li>
+                        </li >
+                        <li className="rest">
                             <a href="/events">Events</a>
                         </li>
-                        <li>
+                        <li className="rest">
                             <a href="/contact">Contact</a>
                         </li>
                         <li>

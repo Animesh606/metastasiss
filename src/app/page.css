@@ -27,6 +27,7 @@
  }
   .headdd h1{
     color:white;
+    padding: 15px 0px;
   }
 .banner{
     min-height: 60vh;
@@ -38,7 +39,7 @@
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    font-family: "sans-serif",serif;
+    font-family: jost, sans-serif;
     line-height: 1.6;
    
     background-image: linear-gradient(-180deg, rgba(130, 228, 233, 0.5),rgba(25, 69, 71,0.5));
@@ -185,8 +186,6 @@
   color: #FFFFFF;
   cursor: pointer;
   display: inline-block;
-  /* font-family: Inter,-apple-system,sans-serif,system-ui,Roboto,"Helvetica Neue",Arial,sans-serif; */
-  /* height: 40px; */
   line-height: 40px;
   outline: 0;
   overflow: hidden;

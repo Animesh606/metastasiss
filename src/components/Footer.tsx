@@ -67,7 +67,7 @@ export const Footer=()=>{
                                     <div className="content">
                                         <a href="#">
                                             <p>
-                                            Step into the future of healthcare with immersive VR gaming
+                                            Step into the future of healthcare with immersive VR simulation
                                             </p>
                                         </a>
                                         <span>
@@ -102,16 +102,16 @@ export const Footer=()=>{
                             </h5>
                             <ul>
                                 <li>
-                                    <Link href="/home"> Home</Link>
+                                <Link href="/home"> Home </Link>
+                                </li>
+                                <li> 
+                                <Link href="/about">  About </Link>
                                 </li>
                                 <li>
-                                <Link href="/about"> About</Link>
+                                <Link href="/login">  Register </Link>
                                 </li>
                                 <li>
-                                <Link href="/login"> Register</Link>
-                                </li>
-                                <li>
-                                <Link href="/events"> Events</Link>
+                                <Link href="/events"> Events </Link>
                                 </li>
                             </ul>
                         </div>
@@ -122,7 +122,7 @@ export const Footer=()=>{
                                 Address
                             </h5>
                             <p>Silbharal, Changsari,
-Guwahati,Assam 781101.</p>
+                              Guwahati,Assam 781101.</p>
                         </div>
                     </div>
                 </div>

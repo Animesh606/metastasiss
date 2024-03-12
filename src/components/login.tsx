@@ -117,11 +117,17 @@ export default function Login() {
                 email: loginemail.trim(),
                 password: loginpassword.trim(),
               });
+              console.log("in login")
               console.log(response);
+              if(response==undefined){
+                
+                toast.error("wrong username or password");
+                return ;
+              }
             // if(response.status === 201)
             //     toast.success(response.data.message);
             // window.location.href=process.env.NEXT_PUBLIC_DOMAIN_NAME!;
-            toast.success("Successfully logged in");
+            toast.success("Successfully logged in bro");
             router.push("/");
         } catch (error: any) {
             if(error?.response.status === 400)

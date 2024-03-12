@@ -69,7 +69,7 @@ a:focus {
     -webkit-transition-duration: .2s;
     -o-transition-duration: .2s;
 }
-
+ 
 ul {
     margin: 0;
     padding: 0;
@@ -196,7 +196,8 @@ margin-bottom: 20px;
 
 .footer .widget3 ul li a,
 .footer .widget4 ul li a {
-font-size: 16px;
+font-size: 17px;
+font-weight: 900;
 color: rgba(255, 255, 255, .6);;
 text-transform: capitalize;
 margin-bottom: 13px;

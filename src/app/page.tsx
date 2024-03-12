@@ -17,7 +17,7 @@ export default function Home() {
   useEffect(() => {
     const timer = setTimeout(() => {
       setLoading(false);
-    }, 2000);
+    }, 1000);
     return () => clearTimeout(timer);
   }, []);
 
@@ -26,7 +26,9 @@ export default function Home() {
       {loading ? (
         <Loader />
       ) : (
-        <div  className="mains" style={{backgroundImage: `url('/background.jpg')`}}>
+        <div  className="mains" style={{
+          backgroundImage: `linear-gradient(to bottom, rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('/bg.jpg')`
+      }}>
           <section className="banner" id="home" >
             <div>
               <div className="aligh-items-center">
