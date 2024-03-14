@@ -27,7 +27,7 @@ export const Navbar = () => {
                     </div>
                 </div>
                 <div className="links">
-                    <ul  className={` ${hover ? "navactive" : "nav"}`}>
+                    <ul className={` ${hover ? "navactive" : "nav"}`}>
                         <li className="rest">
                             <a href="/">Home</a>
                         </li>
@@ -35,7 +35,7 @@ export const Navbar = () => {
                             <a href="/about">About us</a>
                         </li >
                         <li className="rest">
-                            <a href="/events">Events</a>
+                            <a href="/event">Events</a>
                         </li>
                         <li className="rest">
                             <a href="/contact">Contact</a>
@@ -62,10 +62,7 @@ export const Navbar = () => {
                     <FontAwesomeIcon icon={faBars} className="icons" />
                 </div>
             </div>
-      
-          
-   
-            <LoggedinUser/>
+            <LoggedinUser />
         </>
-    ); 
+    );
 };
