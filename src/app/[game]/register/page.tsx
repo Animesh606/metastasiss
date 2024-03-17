@@ -1,6 +1,6 @@
-'use client'
-import React, { useEffect, useState } from "react"
-import "./page.css"
+"use client";
+import React, { useEffect, useState } from "react";
+import "./page.css";
 import { useSession } from "next-auth/react";
 import axios from "axios";
 import toast from "react-hot-toast";
@@ -9,7 +9,7 @@ interface Member {
     email: string;
 }
 interface User {
-    _id:string,
+    _id: string;
     fullName: string;
     email: string;
     phone: string;
@@ -25,7 +25,8 @@ export default function register() {
     const [teamName, setTeamName] = useState<string>("");
     const [members, setMembers] = useState<Member[]>([]);
     const [leaderIdCard, setLeaderIdCard] = useState<File | null>(null);
-    console.log();
+    const [loader, setLoader] = useState(false);
+
     useEffect(() => {
         const getUserData = async () => {
             try {
@@ -44,43 +45,61 @@ export default function register() {
         };
         getUserData();
     }, [status]);
+
     const handleAddMember = () => {
-        if(members.length!=0){
-        const lastMember = members[members.length - 1];
-        if (lastMember.name && lastMember.email) {
-            setMembers([...members, { name: "", email: "" }]);
+        if (members.length != 0) {
+            const lastMember = members[members.length - 1];
+            if (lastMember.name && lastMember.email) {
+                setMembers([...members, { name: "", email: "" }]);
+            } else {
+                alert("Please fill in the previous member's name and email.");
+            }
         } else {
-            alert("Please fill in the previous member's name and email.");
+            setMembers([...members, { name: "", email: "" }]);
         }
-    }
-    else{
-        setMembers([...members, { name: "", email: "" }]);
-    }
     };
-    const register=(e:Event)=>{
-        e.preventDefault();
-       const data={
-        teamName,
-        userId:user?._id,
-        email:user?._id,
-        phone: user?.phone,
-        members,
-        leaderIdCard,
-       }
-       console.log(data);
-    }
-    const handleMemberChange = (index: number, key: keyof Member, value: string) => {
+    const register = async (e: Event) => {
+        try {
+            e.preventDefault();
+            setLoader(true);
+
+            // Create a formData
+            const formData = new FormData();
+            formData.append("teamName", teamName);
+            formData.append("userId", user?._id || "");
+            formData.append("members", JSON.stringify(members));
+            formData.append("collegeId", leaderIdCard!);
+
+            // Send formData to server
+            const response = await axios.post("/api/team", formData);
+            console.log(response);
+            // Add toaster and handle response
+
+        } catch (error) {
+            console.log(error);
+        } finally {
+            setLoader(false);
+        }
+
+    };
+    const handleMemberChange = (
+        index: number,
+        key: keyof Member,
+        value: string
+    ) => {
         const updatedMembers = [...members];
         updatedMembers[index][key] = value;
         setMembers(updatedMembers);
     };
 
-    const handleLeaderIdCardChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const handleLeaderIdCardChange = (
+        event: React.ChangeEvent<HTMLInputElement>
+    ) => {
         const file = event.target.files && event.target.files[0];
         if (file) {
-          setLeaderIdCard(file);
+            setLeaderIdCard(file);
         }
-      };
+    };
 
     return (
         <>
@@ -95,16 +114,20 @@ export default function register() {
                                 <div className="user-input-box">
                                     <label htmlFor="fullName">Team Name</label>
                                     <input
-                                         required
+                                        required
                                         type="text"
                                         id="teamName"
                                         placeholder="Team Name"
                                         value={teamName}
-                                        onChange={(e) => setTeamName(e.target.value)}
+                                        onChange={(e) =>
+                                            setTeamName(e.target.value)
+                                        }
                                     />
                                 </div>
                                 <div className="user-input-box">
-                                    <label htmlFor="leaderName">Leader Name</label>
+                                    <label htmlFor="leaderName">
+                                        Leader Name
+                                    </label>
                                     <input
                                         required
                                         type="text"
@@ -127,7 +150,9 @@ export default function register() {
                                     />
                                 </div>
                                 <div className="user-input-box">
-                                    <label htmlFor="phoneNumber">Phone Number</label>
+                                    <label htmlFor="phoneNumber">
+                                        Phone Number
+                                    </label>
                                     <input
                                         type="text"
                                         id="phoneNumber"
@@ -140,47 +165,76 @@ export default function register() {
                                 <div className="form-group">
                                     {members.map((member, index) => (
                                         <>
-                                        <div key={index}>
-                                        <div  className="user-input-box">
-                                        <label htmlFor="leaderName">Member Name</label>
-                                            <input
-                                                type="text"
-                                                placeholder="Member Name"
-                                                value={member.name}
-                                                onChange={(e) => handleMemberChange(index, "name", e.target.value)}
-                                            />
+                                            <div key={index}>
+                                                <div className="user-input-box">
+                                                    <label htmlFor="leaderName">
+                                                        Member Name
+                                                    </label>
+                                                    <input
+                                                        type="text"
+                                                        placeholder="Member Name"
+                                                        value={member.name}
+                                                        onChange={(e) =>
+                                                            handleMemberChange(
+                                                                index,
+                                                                "name",
+                                                                e.target.value
+                                                            )
+                                                        }
+                                                    />
+                                                </div>
+                                                <div className="user-input-box">
+                                                    <label htmlFor="leaderName">
+                                                        Member Email
+                                                    </label>
+                                                    <input
+                                                        type="email"
+                                                        placeholder="Member Email"
+                                                        value={member.email}
+                                                        onChange={(e) =>
+                                                            handleMemberChange(
+                                                                index,
+                                                                "email",
+                                                                e.target.value
+                                                            )
+                                                        }
+                                                    />
+                                                </div>
                                             </div>
-                                            <div  className="user-input-box">
-                                            <label htmlFor="leaderName">Member Email</label>
-                                            <input
-                                                type="email"
-                                                placeholder="Member Email"
-                                                value={member.email}
-                                                onChange={(e) => handleMemberChange(index, "email", e.target.value)}
-                                            />
-                                        </div>
-                                        </div>
                                         </>
-                                           ))}
-                                     
-                                  </div>
-                                 
-                                  <div className="file">
-                                  <label htmlFor="phoneNumber">Leader's Id card</label>
-                                  <div className="user-input-boxx">
-                                  <input
-                                    type="file"
-                                    id="leaderIdCard"
-                                    onChange={handleLeaderIdCardChange}
-                                     />
-                                    </div> 
+                                    ))}
+                                </div>
+
+                                <div className="file">
+                                    <label htmlFor="phoneNumber">
+                                        Leader's Id card
+                                    </label>
+                                    <div className="user-input-boxx">
+                                        <input
+                                            required
+                                            type="file"
+                                            id="leaderIdCard"
+                                            onChange={handleLeaderIdCardChange}
+                                        />
                                     </div>
+                                </div>
                                 <div className="form-submit-btn">
                                     <div>
-                                        <input className="register" type="submit"  value="Register" />
+                                        <input
+                                            className="register"
+                                            type="submit"
+                                            value="Register"
+                                        />
                                     </div>
                                     <div>
-                                        <button type="button" onClick={handleAddMember} className="button-9"> Add member </button>
+                                        <button
+                                            type="button"
+                                            onClick={handleAddMember}
+                                            className="button-9"
+                                        >
+                                            {" "}
+                                            Add member{" "}
+                                        </button>
                                     </div>
                                 </div>
                             </div>
@@ -189,5 +243,5 @@ export default function register() {
                 </div>
             </div>
         </>
-    )
+    );
 }
