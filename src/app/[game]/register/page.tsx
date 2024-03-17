@@ -4,6 +4,7 @@ import "./page.css";
 import { useSession } from "next-auth/react";
 import axios from "axios";
 import toast from "react-hot-toast";
+import { useParams } from 'next/navigation'
 interface Member {
     name: string;
     email: string;
@@ -26,6 +27,10 @@ export default function register() {
     const [members, setMembers] = useState<Member[]>([]);
     const [leaderIdCard, setLeaderIdCard] = useState<File | null>(null);
     const [loader, setLoader] = useState(false);
+    const params = useParams<{
+        [x: string]: any; tag: string; item: string }>()
+    const game=params.game;
+    const formattedString = game.replace(/_/g, ' ');
 
     useEffect(() => {
         const getUserData = async () => {
@@ -106,10 +111,13 @@ export default function register() {
             <div className="reg">
                 <div className="container">
                     <div>
-                        <h1 className="form-title">Registration</h1>
+                        <h1 className="form-title">Registration for {formattedString}</h1>
                     </div>
                     <div className="details">
-                        <form action="#" onSubmit={register}>
+                  
+                        <form action="#" 
+                          // @ts-ignore
+                        onSubmit={register}>
                             <div className="main-user-info">
                                 <div className="user-input-box">
                                     <label htmlFor="fullName">Team Name</label>
