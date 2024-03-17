@@ -15,13 +15,9 @@ const teamSchema = new mongoose.Schema(
             ref: "User"
         }],
         eventName: {
-            type: String,
-            enum: []
-        },
-        teamImage: {
             type: String
         },
-        transactionId: {
+        collegeId: {
             type: String
         }
     },
