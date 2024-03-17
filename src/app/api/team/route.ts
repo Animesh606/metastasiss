@@ -132,6 +132,83 @@ export async function POST(req: NextRequest) {
         );
     } catch (error) {
         console.log(error);
-        return NextResponse.json({ error });
+        return NextResponse.json(
+            { message: "Something Went Wrong.." },
+            { status: 500 }
+        );
+    }
+}
+
+export async function GET(req: NextRequest) {
+    try {
+        // Check if refer from frontend
+        if(!validOrigin(req)) {
+            return NextResponse.json(
+                { message: "Invalid request origin" },
+                { status: 401 }
+            );
+        }
+
+        // Connect with database
+        await connectDB();
+        
+        // Find all the team Details
+        const teams = await Team.aggregate([
+            {
+                $lookup: {
+                    from: "users",
+                    localField: "leaderDetails",
+                    foreignField: "_id",
+                    as: "leaderDetails",
+                    pipeline: [
+                        {
+                            $project: {
+                                password: false,
+                                participations: false,
+                                verificationToken: false,
+                                forgetPasswordToken: false
+                            }
+                        }
+                    ]
+                }
+                
+            },
+            {
+                $addFields: {
+                    leaderDetails: {
+                        $first: "$leaderDetails"
+                    }
+                }
+            },
+            {
+                $lookup: {
+                    from: "users",
+                    localField: "members",
+                    foreignField: "_id",
+                    as: "members",
+                    pipeline: [
+                        {
+                            $project: {
+                                password: false,
+                                participations: false,
+                                verificationToken: false,
+                                forgetPasswordToken: false
+                            }
+                        }
+                    ]
+                }
+            }
+        ]);
+
+        return NextResponse.json(
+            { message: "Teams found successfully", teams },
+            { status: 200 }
+        );
+    } catch (error) {
+        console.log(error);
+        return NextResponse.json(
+            { message: "Something Went Wrong.." },
+            { status: 500 }
+        );
     }
 }
