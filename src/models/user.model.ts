@@ -30,11 +30,11 @@ const userSchema = new mongoose.Schema(
             enum: ["online", "offline"],
             default: "online"
         },
-        transactionId: String,
-        transactionVerified: {
-            type: Boolean,
-            default: false
-        },
+        // transactionId: String,
+        // transactionVerified: {
+        //     type: Boolean,
+        //     default: false
+        // },
         isAdmin: {
             type: Boolean,
             default: false
