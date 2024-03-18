@@ -4,7 +4,7 @@ import "./page.css";
 import axios from "axios";
 import { useSession } from "next-auth/react";
 import toast from "react-hot-toast";
-
+import Loader from "@/components/Loader";
 interface User {
     fullName: string;
     email: string;
@@ -12,11 +12,12 @@ interface User {
     college: string;
     mode: string;
     transactionId?: string;
-    transactionVerified: boolean;
+    transactionVerified?: boolean;
     isAdmin: boolean;
 }
 
 export default function Profile() {
+    const [loading, setLoading] = useState(true);
     const [user, setUser] = useState<User | null>(null);
     const { data, status } = useSession();
     useEffect(() => {
@@ -34,39 +35,47 @@ export default function Profile() {
             } catch (error: any) {
                 toast.error(error.response.data.message);
             }
+            finally {
+                setLoading(false)
+            }
         };
         getUserData();
     }, [status]);
     return (
-        <div className="profileContainers">
-            <div className="profileContainer">
-                <div>
-                    <h1>My Profile</h1>
-                    <img src="/avatar.png" alt="akas" />
-                    <p>{user?.fullName}</p>
-                </div>
-                <div>
-                    <div>
-                        <h4>Email</h4>
-                        <p>{user?.email}</p>
+        <>
+            {loading ? (
+                <Loader />
+            ) : (
+                <div className="profileContainers">
+                    <div className="profileContainer">
+                        <div>
+                            <h1>My Profile</h1>
+                            <img src="/avatar.png" alt="akas" />
+                            <p>{user?.fullName}</p>
+                        </div>
+                        <div>
+                            <div>
+                                <h4>Email</h4>
+                                <p>{user?.email}</p>
+                            </div>
+                            <div>
+                                <h4>College</h4>
+                                <p>{user?.college}</p>
+                            </div>
+                            <div>
+                                <h4>Phone</h4>
+                                <p>{user?.phone}</p>
+                            </div>
+                            <div>
+                                <h4>Role</h4>
+                                <p>{user?.isAdmin ? "Admin" : "user"}</p>
+                            </div>
+                        </div>
                     </div>
-                    <div>
-                        <h4>College</h4>
-                        <p>{user?.college}</p>
-                    </div>
-                    <div>
-                        <h4>Phone</h4>
-                        <p>{user?.phone}</p>
-                    </div>
-                    <div>
-                        <h4>Role</h4>
-                        <p>{user?.isAdmin ? "Admin" : "user"}</p>
-                    </div>
-                </div>
-            </div>
-            {/* <div className="secondpart">
+                    {/* <div className="secondpart">
                 <Link href="/myorders">My Events</Link> */}
-            {/* </div> */}
-        </div>
+                    {/* </div> */}
+                </div>)}
+        </>
     );
 }

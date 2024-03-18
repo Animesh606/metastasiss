@@ -18,7 +18,7 @@
 .container{
     width: 100%;
     max-width: 500px;
-    height: 500px;
+    height: 530px;
     background: rgba(0, 0, 0, 0.5);
     padding: 28px;
     margin: 0 28px;
@@ -97,7 +97,10 @@
     font-weight: 400;
     margin: 5px 0;
 }
-
+.lastline{
+    padding: 5px;
+    color: rgb(208, 26, 26);
+}
 .user-input-box input{
     height: 40px;
     width: 95%;

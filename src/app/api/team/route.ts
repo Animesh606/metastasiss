@@ -114,7 +114,9 @@ export async function POST(req: NextRequest) {
             email: leadUser.email,
             fullName: leadUser.fullName,
             teamName,
-            eventName
+            eventName,
+            leadUser,
+            members: memberArray
         });
         
         for(let i = 0; i < users.length; i++) {
@@ -122,7 +124,9 @@ export async function POST(req: NextRequest) {
                 email: users[i].email,
                 fullName: users[i].fullName,
                 teamName,
-                eventName
+                eventName,
+                leadUser,
+                members: memberArray
             });
         }
 

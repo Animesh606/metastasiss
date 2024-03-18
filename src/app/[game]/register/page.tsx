@@ -255,6 +255,12 @@ export default function register() {
                                     </div>
                                 </div>
                             </form>
+
+                        </div>
+                        <div className="lastline">
+                            <p >
+                                * all members should be registered in the website
+                            </p>
                         </div>
                     </div>
                 </div>
