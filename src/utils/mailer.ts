@@ -8,6 +8,8 @@ export interface mailInfo {
     eventName?: string;
     url?: string;
     message?: string;
+    leadUser?: any;
+    members?: any[];
 }
 
 const transporter = nodemailer.createTransport({
