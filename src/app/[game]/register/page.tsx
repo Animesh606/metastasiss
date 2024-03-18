@@ -223,7 +223,7 @@ export default function Register() {
 
                                     <div className="file">
                                         <label htmlFor="phoneNumber">
-                                            Leader's Id card
+                                            Leader&apos;s Id card
                                         </label>
                                         <div className="user-input-boxx">
                                             <input
