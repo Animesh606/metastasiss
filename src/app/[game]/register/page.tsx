@@ -259,7 +259,7 @@ export default function Register() {
                         </div>
                         <div className="lastline">
                             <p >
-                            &ast; all members should be registered in the website
+                            &#42; all members should be registered in the website
                             </p>
                         </div>
                     </div>
