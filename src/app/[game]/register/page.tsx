@@ -21,7 +21,7 @@ interface User {
     transactionVerified: boolean;
     isAdmin: boolean;
 }
-export default function register() {
+export default function Register() {
     const [user, setUser] = useState<User | null>(null);
     const { data, status } = useSession();
     const [teamName, setTeamName] = useState<string>("");

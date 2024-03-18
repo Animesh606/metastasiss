@@ -4,7 +4,7 @@ import Image from "next/image";
 import "./page.css"
 import Aos from "aos";
 import  { useRouter } from "next/navigation";
-export default function event(){
+export default function Event(){
     useEffect(() => {
         Aos.init({ duration: 1000 });
       }, []);
