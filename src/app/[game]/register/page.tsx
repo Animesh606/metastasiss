@@ -117,7 +117,7 @@ export default function Register() {
                 <Loader />
             ) : (
                 <div className="reg">
-                    <div className="container">
+                    <div className="containers">
                         <div>
                             <h1 className="form-title">Registration for {formattedString}</h1>
                         </div>

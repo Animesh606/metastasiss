@@ -20,13 +20,13 @@ return(
     <>
     <div className="event">
     <div className="eventCards">
-        <div onClick={() => handleCardClick('game_showcasing')} data-aos="zoom-in-right" className="card">  <Image className="cardImage" src="/game showcasing.png" alt={""} width={150} height={150}></Image>
+        <div onClick={() => handleCardClick('game_showcasing')} data-aos="zoom-in-right" className="card">  <Image className="cardImage" src="/game showcasing-min.png" alt={""} width={150} height={150}></Image>
         </div>
-        <div   onClick={() => handleCardClick('Gaming_competition')} data-aos="zoom-in-left" className="card">  <Image className="cardImage" src="/Gaming competition.png" alt={""} width={150} height={150}></Image>
+        <div   onClick={() => handleCardClick('Gaming_competition')} data-aos="zoom-in-left" className="card">  <Image className="cardImage" src="/Gaming competition-min.png" alt={""} width={150} height={150}></Image>
         </div>
-        <div  onClick={() => handleCardClick('Meme_competition')} data-aos="zoom-in-right" className="card">  <Image className="cardImage" src="/Meme competition.png" alt={""} width={150} height={150}></Image>
+        <div  onClick={() => handleCardClick('Meme_competition')} data-aos="zoom-in-right" className="card">  <Image className="cardImage" src="/Meme competition-min.png" alt={""} width={150} height={150}></Image>
         </div>
-        <div  onClick={() => handleCardClick('Quiz_Competition')} data-aos="zoom-in-left" className="card">  <Image className="cardImage" src="/Quiz Competition.png" alt={""} width={150} height={150}></Image>
+        <div  onClick={() => handleCardClick('Quiz_Competition')} data-aos="zoom-in-left" className="card">  <Image className="cardImage" src="/Quiz Competition-min.png" alt={""} width={150} height={150}></Image>
         </div>
     </div>
     </div>
