@@ -1,6 +1,5 @@
 export { default } from "next-auth/middleware";
 
 export const config = {
-    matcher: ["/profile"]
+    matcher: ["/profile","/:game/register"]
 }
-// /:game/register
