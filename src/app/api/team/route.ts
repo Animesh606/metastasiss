@@ -5,9 +5,10 @@ import User from "@/models/user.model";
 import Team from "@/models/team.model";
 import sendEmail from "@/utils/mailer";
 import validOrigin from "@/utils/apiRequestOrigin";
-
-export async function POST(req: NextRequest) {
+import cloudinary from "@/../cloudinary.config";
+export async function POST(req: any,res:any) {
     try {
+     
         // Check if refer from frontend
         if(!validOrigin(req)) {
             return NextResponse.json(
@@ -15,26 +16,32 @@ export async function POST(req: NextRequest) {
                 { status: 401 }
             );
         }
-
+       
         // Take team details from request formData
+    
         const formData = await req.formData();
-
         // Get all formaDatas
         const teamName = formData.get("teamName")?.toString();
         const eventName = formData.get("eventName")?.toString();
         const members = formData.get("members")?.toString();
         const userId = formData.get("userId")?.toString();
-        const collegeId = formData.get("collegeId");
-        if (!teamName || !eventName || !members || !userId || !collegeId) {
+        const leaderIdCard = formData.get("leaderIdCard");
+        // console.log(leaderIdCard)
+        if (!teamName || !eventName || !members || !userId || !leaderIdCard) {
             return NextResponse.json(
                 { message: "Field Missing" },
                 { status: 400 }
             );
         }
-
-        // Upload college Id image
-        const url = await uploadImage(collegeId as File);
-
+        
+      
+        const mycloud=await cloudinary.uploader.upload(leaderIdCard,{
+            folder:"WebData/Metastasiss/CollegeId/",
+            width:150,
+            crop:"scale"
+        })
+        const url = mycloud.secure_url;
+        // const url= result.secure_url;
         // Connect with database
         await connectDB();
 
@@ -97,7 +104,7 @@ export async function POST(req: NextRequest) {
             eventName,
             collegeId: url,
         });
-
+       
         await newTeam.save();
 
         // Add team to partipation list of each user
@@ -135,7 +142,7 @@ export async function POST(req: NextRequest) {
             { status: 201 }
         );
     } catch (error) {
-        console.log(error);
+    
         return NextResponse.json(
             { message: "Something Went Wrong.." },
             { status: 500 }
@@ -209,7 +216,7 @@ export async function GET(req: NextRequest) {
             { status: 200 }
         );
     } catch (error) {
-        console.log(error);
+        // console.log(error);
         return NextResponse.json(
             { message: "Something Went Wrong.." },
             { status: 500 }
