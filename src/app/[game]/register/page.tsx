@@ -26,7 +26,7 @@ export default function Register() {
     const { data, status } = useSession();
     const [teamName, setTeamName] = useState<string>("");
     const [members, setMembers] = useState<Member[]>([]);
-    const [leaderIdCard, setLeaderIdCard] = useState<File | null>(null);
+    const [leaderIdCard, setLeaderIdCard] = useState<any | null>(null);
     const [loader, setLoader] = useState(false);
     const params = useParams<{
         [x: string]: any; tag: string; item: string
@@ -71,22 +71,22 @@ export default function Register() {
             setLoader(true);
 
             // Create a formData
-            const formData = new FormData();
-            formData.append("teamName", teamName);
-            formData.append("eventName", formattedString);
-            formData.append("userId", user?._id || "");
-            formData.append("members", JSON.stringify(members));
-            formData.append("collegeId", leaderIdCard!);
-
+            const myForm = new FormData();
+            myForm.set("teamName", teamName);
+           myForm.set("eventName", formattedString);
+           myForm.set("members", JSON.stringify(members));
+            myForm.set("userId", user?._id || "");
+            myForm.set("leaderIdCard", leaderIdCard);
             // Send formData to server
-            const response = await axios.post("/api/team", formData);
+            const config = { headers: { "Content-Type": "multipart/form-data" } };
+            const response = await axios.post("/api/team", myForm,config);
 
             // Add toaster and handle response
             toast.success("Team registered Successfully");
 
         } catch (error: any) {
             toast.error(`${error.response.data.message}`);
-            console.log(error);
+            // console.log(error);
         } finally {
             setLoader(false);
         }
@@ -103,13 +103,36 @@ export default function Register() {
     };
 
     const handleLeaderIdCardChange = (
-        event: React.ChangeEvent<HTMLInputElement>
+        event:any
     ) => {
         const file = event.target.files && event.target.files[0];
+        const limit=2000;
+       
         if (file) {
-            setLeaderIdCard(file);
+         
+            if((file.size/1024)>limit)
+            {
+                // console.log("works");
+                if( event.target.files)
+                setLeaderIdCard(null);
+                toast.error(`size is greater than 2MB please select another file`)
+            }
+            else
+            {
+               
+                    const reader = new FileReader();
+              
+                    reader.onload = () => {
+                      if (reader.readyState === 2) {
+                        // Cast reader.result to string
+                        setLeaderIdCard(reader.result);
+                      }
+                    };
+                    reader.readAsDataURL(event.target.files[0]);
+                  } 
+            }
         }
-    };
+
 
     return (
         <>
@@ -223,11 +246,12 @@ export default function Register() {
 
                                     <div className="file">
                                         <label htmlFor="phoneNumber">
-                                            Leader&apos;s Id card
+                                            Leader&apos;s Id card (less than 2MB and upload only pdf or jpeg )
                                         </label>
                                         <div className="user-input-boxx">
                                             <input
                                                 required
+                                                name="leaderIdCard"
                                                 type="file"
                                                 id="leaderIdCard"
                                                 onChange={handleLeaderIdCardChange}
@@ -268,4 +292,4 @@ export default function Register() {
 
         </>
     );
-}
+};
