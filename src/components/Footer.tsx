@@ -39,7 +39,7 @@ export const Footer=()=>{
                                         </a>
                                     </li> */}
                                     <li>
-                                        <a href="https://www.instagram.com/metastasiss.edtech/">
+                                        <a href="https://www.instagram.com/meta_stasiss.aiims/">
                                         <div className="face">
                                         <FontAwesomeIcon icon={faInstagram} className="icon" style={{color:'pink', fontSize:"40px"}}/>
                                            </div>
