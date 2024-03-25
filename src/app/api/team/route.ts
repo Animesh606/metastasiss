@@ -6,19 +6,18 @@ import Team from "@/models/team.model";
 import sendEmail from "@/utils/mailer";
 import validOrigin from "@/utils/apiRequestOrigin";
 import cloudinary from "@/../cloudinary.config";
-export async function POST(req: any,res:any) {
+export async function POST(req: any, res: any) {
     try {
-     
         // Check if refer from frontend
-        if(!validOrigin(req)) {
+        if (!validOrigin(req)) {
             return NextResponse.json(
                 { message: "Invalid request origin" },
                 { status: 401 }
             );
         }
-       
+
         // Take team details from request formData
-    
+
         const formData = await req.formData();
         // Get all formaDatas
         const teamName = formData.get("teamName")?.toString();
@@ -33,25 +32,40 @@ export async function POST(req: any,res:any) {
                 { status: 400 }
             );
         }
-        
-      
-        const mycloud=await cloudinary.uploader.upload(leaderIdCard,{
-            folder:"WebData/Metastasiss/CollegeId/",
-            width:150,
-            crop:"scale"
-        })
+
+        const mycloud = await cloudinary.uploader.upload(leaderIdCard, {
+            folder: "WebData/Metastasiss/CollegeId/",
+            width: 150,
+            crop: "scale",
+        });
         const url = mycloud.secure_url;
         // const url= result.secure_url;
         // Connect with database
         await connectDB();
 
         // Find leadUserDetails
-        const leadUser = await User.findById(userId);
+        const leadUser = await User.findById(userId)
+            .populate("participantions")
+            .select("-password -verificationToken -forgetPasswordToken");
+
+        // If leadUser is missing
         if (!leadUser) {
             return NextResponse.json(
                 { message: "User is not authenticate" },
                 { status: 401 }
             );
+        }
+
+        // If leadUser already registered for the event
+        for(let i = 0; i < leadUser.participations.length; i++) {
+            if (leadUser.participations[i].eventName === eventName) {
+                return NextResponse.json(
+                    {
+                        message: `${leadUser.fullName} is already registered for this event`
+                    },
+                    { status: 403 }
+                );
+            }
         }
 
         // Parse members
@@ -87,7 +101,7 @@ export async function POST(req: any,res:any) {
                         { status: 403 }
                     );
                 }
-            };
+            }
 
             // add user to users list
             users.push(user);
@@ -104,7 +118,7 @@ export async function POST(req: any,res:any) {
             eventName,
             collegeId: url,
         });
-       
+
         await newTeam.save();
 
         // Add team to partipation list of each user
@@ -125,7 +139,7 @@ export async function POST(req: any,res:any) {
             leadUser,
             members: memberArray
         });
-        
+
         for(let i = 0; i < users.length; i++) {
             await sendEmail("teamRegistration", {
                 email: users[i].email,
@@ -142,7 +156,6 @@ export async function POST(req: any,res:any) {
             { status: 201 }
         );
     } catch (error) {
-    
         return NextResponse.json(
             { message: "Something Went Wrong.." },
             { status: 500 }
@@ -162,7 +175,7 @@ export async function GET(req: NextRequest) {
 
         // Connect with database
         await connectDB();
-        
+
         // Find all the team Details
         const teams = await Team.aggregate([
             {
@@ -182,7 +195,6 @@ export async function GET(req: NextRequest) {
                         }
                     ]
                 }
-                
             },
             {
                 $addFields: {
