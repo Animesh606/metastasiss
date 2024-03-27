@@ -60,6 +60,8 @@ export async function POST(req: NextRequest) {
             email,
             fullName,
             url: `${process.env.DOMAIN_NAME}/verifyEmail?token=${hashedToken}`,
+            sumittedBy: undefined,
+            link: ""
         });
 
         // Send response back
