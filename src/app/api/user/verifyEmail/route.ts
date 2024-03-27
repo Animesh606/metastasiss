@@ -40,6 +40,8 @@ export async function POST(req: NextRequest) {
         await sendEmail("userRegistration", {
             email: user.email,
             fullName: user.fullName,
+            sumittedBy: undefined,
+            link: ""
         });
 
         return NextResponse.json(
