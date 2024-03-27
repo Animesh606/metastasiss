@@ -121,7 +121,6 @@ function DropdownItem(props: {
         | React.ReactElement<any, string | React.JSXElementConstructor<any>>
         | Iterable<React.ReactNode>
         | React.ReactPortal
-        | React.PromiseLikeOfReactNode
         | null
         | undefined;
     text:
@@ -130,8 +129,7 @@ function DropdownItem(props: {
         | boolean
         | React.ReactElement<any, string | React.JSXElementConstructor<any>>
         | Iterable<React.ReactNode>
-        | React.ReactPortal
-        | React.PromiseLikeOfReactNode
+        | React.ReactPortal   
         | null
         | undefined;
 }) {
