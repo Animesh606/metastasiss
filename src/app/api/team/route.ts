@@ -26,12 +26,7 @@ export async function POST(req: any, res: any) {
         const userId = formData.get("userId")?.toString();
         const submission = formData.get("submission")?.toString();
         const leaderIdCard = formData.get("leaderIdCard");
-        // console.log(leaderIdCard)
-        // console.log('teamName:', teamName);
-        // console.log('submission:', submission);
-        // console.log('eventName:', eventName);
-        // console.log('members:', members);
-        // console.log('userId:', userId);
+    
         // console.log('leaderIdCard:', leaderIdCard);
         if (!teamName || !submission || !eventName || !members || !userId || !leaderIdCard) {
             return NextResponse.json(
@@ -45,6 +40,12 @@ export async function POST(req: any, res: any) {
             width: 150,
             crop: "scale",
         });
+        // console.log(leaderIdCard)
+        console.log('teamName:', teamName);
+        console.log('submission:', submission);
+        console.log('eventName:', eventName);
+        console.log('members:', members);
+        console.log('userId:', userId);
         const url = mycloud.secure_url;
         // const url= result.secure_url;
         // Connect with database
@@ -52,15 +53,15 @@ export async function POST(req: any, res: any) {
 
         // Find leadUserDetails
         const leadUser = await User.findById(userId)
-            .populate("participantions")
+            .populate("participations")
             .select("-password -verificationToken -forgetPasswordToken");
-
+         console.log(leadUser)
         // If leadUser is missing
         if (!leadUser) {
             return NextResponse.json(
                 { message: "User is not authenticate" },
                 { status: 401 }
-            );
+            )
         }
 
         // If leadUser already registered for the event
@@ -71,7 +72,7 @@ export async function POST(req: any, res: any) {
                         message: `${leadUser.fullName} is already registered for this event`
                     },
                     { status: 403 }
-                );
+                )
             }
         }
 
