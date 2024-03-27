@@ -84,7 +84,9 @@ export default function Home() {
             
             <marquee
               ref={marqueeRef}
-            direction="up" scrollamount="2" behavior="scroll">
+              //@ts-ignore
+           
+           direction="up" scrollamount="2" behavior="scroll">
                 <div className= 'notice blink' >
                 <a href="Brochure.pdf" download>
                 <span> Notice 1: </span>Check out our event brochure for all the exciting details and program schedule
