@@ -31,8 +31,16 @@ export default function Register() {
     const params = useParams<{
         [x: string]: any; tag: string; item: string
     }>()
-    const game = params.game;
-    const formattedString = game.replace(/_/g, ' ');
+    const games = params.game;
+    let words: string[] = games.split('_');
+
+    // Capitalize the first letter of each word
+    let capitalizedWords: string[] = words.map(word => {
+      return word.charAt(0).toUpperCase() + word.slice(1);
+    });
+  
+    // Join the capitalized words back together
+    let formattedString: string = capitalizedWords.join(' ');
 
     useEffect(() => {
         const getUserData = async () => {
@@ -73,10 +81,11 @@ export default function Register() {
             // Create a formData
             const myForm = new FormData();
             myForm.set("teamName", teamName);
-           myForm.set("eventName", formattedString);
-           myForm.set("members", JSON.stringify(members));
+            myForm.set("eventName", formattedString);
+            myForm.set("members", JSON.stringify(members));
             myForm.set("userId", user?._id || "");
             myForm.set("leaderIdCard", leaderIdCard);
+            myForm.set("submission"," ");
             // Send formData to server
             const config = { headers: { "Content-Type": "multipart/form-data" } };
             const response = await axios.post("/api/team", myForm,config);
@@ -86,7 +95,7 @@ export default function Register() {
 
         } catch (error: any) {
             toast.error(`${error.response.data.message}`);
-            // console.log(error);
+         
         } finally {
             setLoader(false);
         }
@@ -112,7 +121,7 @@ export default function Register() {
          
             if((file.size/1024)>limit)
             {
-                // console.log("works");
+               
                 if( event.target.files)
                 setLeaderIdCard(null);
                 toast.error(`size is greater than 2MB please select another file`)

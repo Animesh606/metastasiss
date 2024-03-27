@@ -35,6 +35,9 @@ export const Navbar = () => {
                             <a href="/about">About us</a>
                         </li >
                         <li className="rest">
+                            <a href="https://vintagesnakegamegameysio.netlify.app/">Experience</a>
+                        </li >
+                        <li className="rest">
                             <a href="/event">Events</a>
                         </li>
                         <li className="rest">
@@ -44,7 +47,7 @@ export const Navbar = () => {
                             <a
                                 href="/login"
                                 className="loggins"
-                                style={{ display: (status === "authenticated") ? "none" : "block" }}
+                                style={{ visibility: (status === "authenticated") ? "hidden" : "visible" }}
                             >
                                 Login
                             </a>

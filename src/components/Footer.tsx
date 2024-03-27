@@ -18,7 +18,8 @@ export const Footer=()=>{
                             </div>
                             <div className="para">
                             <p>
-                            As a startup program under the supervision of AIIMS Guwahati, we have ambitious plans for the future. In addition to expanding our presence within India, we aim to establish partnerships and collaborations on a global scale. By seeking validation from experts in the field and continually refining our offerings, we aspire to set new standards for Medical education worldwide.
+                            As a startup program under the supervision of AIIMS Guwahati, we have ambitious plans for the future. In addition to expanding our presence within India, we aim to establish partnerships and collaborations on a global scale.
+                            <span>By seeking validation from experts in the field and continually refining our offerings, we aspire to set new standards for Medical education worldwide.</span> 
                             </p>
                             </div>
                             <div className="socialLinks">

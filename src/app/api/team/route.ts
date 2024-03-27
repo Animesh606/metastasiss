@@ -15,7 +15,7 @@ export async function POST(req: any, res: any) {
                 { status: 401 }
             );
         }
-
+       
         // Take team details from request formData
 
         const formData = await req.formData();
@@ -24,9 +24,16 @@ export async function POST(req: any, res: any) {
         const eventName = formData.get("eventName")?.toString();
         const members = formData.get("members")?.toString();
         const userId = formData.get("userId")?.toString();
+        const submission = formData.get("submission")?.toString();
         const leaderIdCard = formData.get("leaderIdCard");
         // console.log(leaderIdCard)
-        if (!teamName || !eventName || !members || !userId || !leaderIdCard) {
+        // console.log('teamName:', teamName);
+        // console.log('submission:', submission);
+        // console.log('eventName:', eventName);
+        // console.log('members:', members);
+        // console.log('userId:', userId);
+        // console.log('leaderIdCard:', leaderIdCard);
+        if (!teamName || !submission || !eventName || !members || !userId || !leaderIdCard) {
             return NextResponse.json(
                 { message: "Field Missing" },
                 { status: 400 }
@@ -82,7 +89,7 @@ export async function POST(req: any, res: any) {
             })
                 .populate("participations")
                 .select("-password -verificationToken -forgetPasswordToken");
-
+        
             // If user not exist
             if (!user) {
                 return NextResponse.json(
@@ -112,11 +119,12 @@ export async function POST(req: any, res: any) {
 
         // create the team
         const newTeam = new Team({
-            teamName,
-            leaderDetails: userId,
-            members: userIds,
-            eventName,
-            collegeId: url,
+            teamName, 
+            leaderDetails: userId, 
+            members: userIds, 
+            eventName, 
+            collegeId: url, 
+            submission,
         });
 
         await newTeam.save();
@@ -137,7 +145,9 @@ export async function POST(req: any, res: any) {
             teamName,
             eventName,
             leadUser,
-            members: memberArray
+            members: memberArray,
+            sumittedBy: undefined,
+            link: ""
         });
 
         for(let i = 0; i < users.length; i++) {
@@ -147,7 +157,9 @@ export async function POST(req: any, res: any) {
                 teamName,
                 eventName,
                 leadUser,
-                members: memberArray
+                members: memberArray,
+                sumittedBy: undefined,
+                link: ""
             });
         }
 

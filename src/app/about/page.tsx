@@ -1,6 +1,6 @@
 import React from "react";
 import { Commingsoon } from "@/components/Commingsoon";
-export default function home(){
+export default function about(){
     return(
     <>
      <Commingsoon/>

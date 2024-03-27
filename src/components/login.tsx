@@ -48,7 +48,7 @@ export default function Login() {
                 password: password.trim(),
             });
             if(response.status === 201){
-                toast.success("Sent Verification Mail!");
+                toast.success("Sent Verification Mail, Please verify it ",  { duration: 30000 });
                 router.push("/");
             }
         } catch (error: any) {
@@ -127,7 +127,7 @@ export default function Login() {
             // if(response.status === 201)
             //     toast.success(response.data.message);
             // window.location.href=process.env.NEXT_PUBLIC_DOMAIN_NAME!;
-            toast.success("Successfully logged in bro");
+            toast.success("Successfully logged in");
             router.push("/");
         } catch (error: any) {
             if(error?.response.status === 400)
