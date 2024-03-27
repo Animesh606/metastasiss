@@ -96,8 +96,8 @@ export default function Home() {
                   <p> Notice 2: **** Registration for teams has started ****</p>
                 </div>
                 <div className= 'notice blink'>
-                <a href="brochure.pdf" download>
-                  <span> Notice 3:</span> Gameysio event banner has released for 2024 !
+                <a href="Gameysio poster.pdf" download>
+                  <span> Notice 3:</span> Gameysio event poster has released for 2024 !
                   </a>
                 </div>
                 <div className= 'notice blink'>
