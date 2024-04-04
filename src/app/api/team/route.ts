@@ -39,16 +39,15 @@ export async function POST(req: any, res: any) {
         console.log('eventName:', eventName);
         console.log('members:', members);
         console.log('userId:', userId);
-        // const mycloud = await cloudinary.uploader.upload(leaderIdCard, {
-        //     folder: "WebData/Metastasiss/CollegeId/",
-        //     width: 150,
-        //     crop: "scale",
-        // });
+        const mycloud = await cloudinary.uploader.upload(leaderIdCard, {
+            folder: "WebData/Metastasiss/CollegeId/",
+            width: 150,
+            crop: "scale",
+        });
         if(leaderIdCard)
         console.log("yes")
        
-        // const url = mycloud.secure_url;
-        const url='htfdtfct'
+        const url = mycloud.secure_url;
         // const url= result.secure_url;
         // Connect with database
         await connectDB();
@@ -142,29 +141,29 @@ export async function POST(req: any, res: any) {
             });
         }
 
-        // await sendEmail("teamRegistration", {
-        //     email: leadUser.email,
-        //     fullName: leadUser.fullName,
-        //     teamName,
-        //     eventName,
-        //     leadUser,
-        //     members: memberArray,
-        //     sumittedBy: undefined,
-        //     link: ""
-        // });
+        await sendEmail("teamRegistration", {
+            email: leadUser.email,
+            fullName: leadUser.fullName,
+            teamName,
+            eventName,
+            leadUser,
+            members: memberArray,
+            sumittedBy: undefined,
+            link: ""
+        });
 
-        // for(let i = 0; i < users.length; i++) {
-        //     await sendEmail("teamRegistration", {
-        //         email: users[i].email,
-        //         fullName: users[i].fullName,
-        //         teamName,
-        //         eventName,
-        //         leadUser,
-        //         members: memberArray,
-        //         sumittedBy: undefined,
-        //         link: ""
-        //     });
-        // }
+        for(let i = 0; i < users.length; i++) {
+            await sendEmail("teamRegistration", {
+                email: users[i].email,
+                fullName: users[i].fullName,
+                teamName,
+                eventName,
+                leadUser,
+                members: memberArray,
+                sumittedBy: undefined,
+                link: ""
+            });
+        }
 
         return NextResponse.json(
             { message: "Team registered successfully" ,newTeam},
