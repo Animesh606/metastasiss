@@ -89,11 +89,12 @@ export default function Register() {
             // Send formData to server
             const config = { headers: { "Content-Type": "multipart/form-data" } };
             const response = await axios.post("/api/team", myForm,config);
-
+            console.log(response)
             // Add toaster and handle response
             toast.success("Team registered Successfully");
 
         } catch (error: any) {
+            console.log(error);
             toast.error(`${error.response.data.message}`);
          
         } finally {

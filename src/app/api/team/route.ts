@@ -34,18 +34,19 @@ export async function POST(req: any, res: any) {
                 { status: 400 }
             );
         }
-
-        const mycloud = await cloudinary.uploader.upload(leaderIdCard, {
-            folder: "WebData/Metastasiss/CollegeId/",
-            width: 150,
-            crop: "scale",
-        });
-        // console.log(leaderIdCard)
         console.log('teamName:', teamName);
         console.log('submission:', submission);
         console.log('eventName:', eventName);
         console.log('members:', members);
         console.log('userId:', userId);
+        const mycloud = await cloudinary.uploader.upload(leaderIdCard, {
+            folder: "WebData/Metastasiss/CollegeId/",
+            width: 150,
+            crop: "scale",
+        });
+        if(leaderIdCard)
+        console.log("yes")
+       
         const url = mycloud.secure_url;
         // const url= result.secure_url;
         // Connect with database
@@ -165,7 +166,7 @@ export async function POST(req: any, res: any) {
         }
 
         return NextResponse.json(
-            { message: "Team registered successfully" },
+            { message: "Team registered successfully" ,newTeam},
             { status: 201 }
         );
     } catch (error) {
