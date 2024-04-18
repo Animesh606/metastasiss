@@ -19,6 +19,10 @@ const teamSchema = new mongoose.Schema(
         },
         collegeId: {
             type: String
+        },
+        submission:{
+            type: String,
+            default:" ",
         }
     },
     {

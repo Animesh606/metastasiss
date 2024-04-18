@@ -7,6 +7,61 @@
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;   
   }
+  .not{
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+  }
+  .notice>p{
+    color: yellow;
+  }
+  .blink {
+  
+    animation: blink-animation 0.8s infinite alternate;
+}
+
+@keyframes blink-animation {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: .7;
+    }
+}
+  .not a{
+    text-decoration: none;
+    outline: none;
+    color: #c22fc9;
+  }
+   .notice-board {
+        min-width: 300px;
+        height: 200px;
+        font-size: large;
+        font-weight: bold;
+        /* border: 2px solid #ccc; */
+        border-radius: 5px;
+        padding: 10px;
+        margin: 20px auto;
+        background:transparent;
+        overflow: hidden;
+    }
+    .notice:hover{
+     cursor: pointer;
+     color: #52bfb6;
+    }
+    .notice >span{
+
+    }
+    .notice {
+        margin-bottom: 10px;
+        color: #c22fc9;
+        /* background-color: #287681; */
+        padding: 5px;
+        border-radius: 5px;
+        list-style-type: disc;
+        padding-left: 20px;
+    }
   .mains{
     background-position: top center;
     background-size: cover;
@@ -216,6 +271,11 @@ button:hover {
     /* rotate: ; */
     animation: updown 3s linear infinite;
 
+  }
+  .rewards > h1{
+    background: -webkit-linear-gradient(rgb(130, 228, 233),rgb(25, 69, 71));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent; 
   }
   @keyframes updown {
       0% {

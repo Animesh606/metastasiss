@@ -1,4 +1,5 @@
 import { contactUsMail, resetPasswordMail, teamRegistrationSuccessMail, userRegistrationSuccessMail, verificationMail } from "@/emails"
+import eventSubmitionMail from "@/emails/eventSubmitionMail";
 import nodemailer from "nodemailer";
 
 export interface mailInfo {
@@ -10,6 +11,8 @@ export interface mailInfo {
     message?: string;
     leadUser?: any;
     members?: any[];
+    sumittedBy:any;
+    link:string;
 }
 
 const transporter = nodemailer.createTransport({
@@ -62,6 +65,14 @@ const sendEmail = async (mailType: string, mailInfo: mailInfo) => {
                 to: mailInfo.email,
                 subject: `Welcome ${mailInfo.teamName} to ${mailInfo.eventName}`,
                 html: teamRegistrationSuccessMail(mailInfo)
+            });
+        }
+        if(mailType === "eventSubmition"){
+            return await transporter.sendMail({
+                from: process.env.MAIL_USER,
+                to: mailInfo.email,
+                subject: `Submission successfull for ${mailInfo.eventName}`,
+                html: eventSubmitionMail(mailInfo)
             });
         }
     } catch (error: any) {

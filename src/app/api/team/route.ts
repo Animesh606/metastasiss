@@ -15,7 +15,7 @@ export async function POST(req: any, res: any) {
                 { status: 401 }
             );
         }
-
+       
         // Take team details from request formData
 
         const formData = await req.formData();
@@ -24,20 +24,29 @@ export async function POST(req: any, res: any) {
         const eventName = formData.get("eventName")?.toString();
         const members = formData.get("members")?.toString();
         const userId = formData.get("userId")?.toString();
+        const submission = formData.get("submission")?.toString();
         const leaderIdCard = formData.get("leaderIdCard");
-        // console.log(leaderIdCard)
-        if (!teamName || !eventName || !members || !userId || !leaderIdCard) {
+    
+        // console.log('leaderIdCard:', leaderIdCard);
+        if (!teamName || !submission || !eventName || !members || !userId || !leaderIdCard) {
             return NextResponse.json(
                 { message: "Field Missing" },
                 { status: 400 }
             );
         }
-
+        console.log('teamName:', teamName);
+        console.log('submission:', submission);
+        console.log('eventName:', eventName);
+        console.log('members:', members);
+        console.log('userId:', userId);
         const mycloud = await cloudinary.uploader.upload(leaderIdCard, {
             folder: "WebData/Metastasiss/CollegeId/",
             width: 150,
             crop: "scale",
         });
+        if(leaderIdCard)
+        console.log("yes")
+       
         const url = mycloud.secure_url;
         // const url= result.secure_url;
         // Connect with database
@@ -45,15 +54,15 @@ export async function POST(req: any, res: any) {
 
         // Find leadUserDetails
         const leadUser = await User.findById(userId)
-            .populate("participantions")
+            .populate("participations")
             .select("-password -verificationToken -forgetPasswordToken");
-
+         console.log(leadUser)
         // If leadUser is missing
         if (!leadUser) {
             return NextResponse.json(
                 { message: "User is not authenticate" },
                 { status: 401 }
-            );
+            )
         }
 
         // If leadUser already registered for the event
@@ -64,7 +73,7 @@ export async function POST(req: any, res: any) {
                         message: `${leadUser.fullName} is already registered for this event`
                     },
                     { status: 403 }
-                );
+                )
             }
         }
 
@@ -82,7 +91,7 @@ export async function POST(req: any, res: any) {
             })
                 .populate("participations")
                 .select("-password -verificationToken -forgetPasswordToken");
-
+        
             // If user not exist
             if (!user) {
                 return NextResponse.json(
@@ -112,11 +121,12 @@ export async function POST(req: any, res: any) {
 
         // create the team
         const newTeam = new Team({
-            teamName,
-            leaderDetails: userId,
-            members: userIds,
-            eventName,
-            collegeId: url,
+            teamName, 
+            leaderDetails: userId, 
+            members: userIds, 
+            eventName, 
+            collegeId: url, 
+            submission,
         });
 
         await newTeam.save();
@@ -137,7 +147,9 @@ export async function POST(req: any, res: any) {
             teamName,
             eventName,
             leadUser,
-            members: memberArray
+            members: memberArray,
+            sumittedBy: undefined,
+            link: ""
         });
 
         for(let i = 0; i < users.length; i++) {
@@ -147,12 +159,14 @@ export async function POST(req: any, res: any) {
                 teamName,
                 eventName,
                 leadUser,
-                members: memberArray
+                members: memberArray,
+                sumittedBy: undefined,
+                link: ""
             });
         }
 
         return NextResponse.json(
-            { message: "Team registered successfully" },
+            { message: "Team registered successfully" ,newTeam},
             { status: 201 }
         );
     } catch (error) {
