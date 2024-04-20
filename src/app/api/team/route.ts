@@ -34,21 +34,14 @@ export async function POST(req: any, res: any) {
                 { status: 400 }
             );
         }
-        console.log('teamName:', teamName);
-        console.log('submission:', submission);
-        console.log('eventName:', eventName);
-        console.log('members:', members);
-        console.log('userId:', userId);
+
         const mycloud = await cloudinary.uploader.upload(leaderIdCard, {
             folder: "WebData/Metastasiss/CollegeId/",
             width: 150,
             crop: "scale",
         });
-        if(leaderIdCard)
-        console.log("yes")
-       
         const url = mycloud.secure_url;
-        // const url= result.secure_url;
+
         // Connect with database
         await connectDB();
 
@@ -56,7 +49,7 @@ export async function POST(req: any, res: any) {
         const leadUser = await User.findById(userId)
             .populate("participations")
             .select("-password -verificationToken -forgetPasswordToken");
-         console.log(leadUser)
+
         // If leadUser is missing
         if (!leadUser) {
             return NextResponse.json(
@@ -66,54 +59,49 @@ export async function POST(req: any, res: any) {
         }
 
         // If leadUser already registered for the event
-        for(let i = 0; i < leadUser.participations.length; i++) {
-            if (leadUser.participations[i].eventName === eventName) {
-                return NextResponse.json(
-                    {
-                        message: `${leadUser.fullName} is already registered for this event`
-                    },
-                    { status: 403 }
-                )
-            }
+        if (leadUser.participations.some((participation: any) => participation.eventName === eventName)) {
+            return NextResponse.json(
+                {
+                    message: `${leadUser.fullName} is already registered for this event`
+                },
+                { status: 403 }
+            )
         }
 
         // Parse members
         const memberArray = await JSON.parse(members);
 
         // Get all members full details
-        let users = <any[]>[];
-
-        for (let i = 0; i < memberArray.length; i++) {
+        const userPromises = memberArray.map(async (member: any) => {
             // Get member details
-            let user = await User.findOne({
-                email: memberArray[i].email,
+            const user = await User.findOne({
+                email: member.email,
                 isVerified: true,
-            })
-                .populate("participations")
-                .select("-password -verificationToken -forgetPasswordToken");
+            }).populate("participations")
+              .select("-password -verificationToken -forgetPasswordToken");
         
             // If user not exist
             if (!user) {
-                return NextResponse.json(
-                    { message: `${memberArray[i].name} is not a verified user` },
-                    { status: 403 }
-                );
+                throw new Error(`${member.name} is not a verified user`);
             }
-
+        
             // If user already registered for the event
-            for(let i = 0; i < user.participations.length; i++) {
-                if (user.participations[i].eventName === eventName) {
-                    return NextResponse.json(
-                        {
-                            message: `${memberArray[i].name} is already registered for this event`,
-                        },
-                        { status: 403 }
-                    );
-                }
+            if (user.participations.some((participation: any) => participation.eventName === eventName)) {
+                throw new Error(`${member.name} is already registered for this event`);
             }
+        
+            return user;
+        });
 
-            // add user to users list
-            users.push(user);
+        let users = [];
+        try {
+            users = await Promise.all(userPromises);
+            // All database calls are complete and successful
+            // Proceed with further processing
+            console.log(users);
+        } catch (error: any) {
+            // Handle errors from individual promises
+            return NextResponse.json({ message: error.message }, { status: 403 });
         }
 
         // users with only ids
@@ -131,15 +119,20 @@ export async function POST(req: any, res: any) {
 
         await newTeam.save();
 
-        // Add team to partipation list of each user
-        await User.findByIdAndUpdate(userId, {
-            $push: { participations: newTeam._id },
-        });
-        for (let i = 0; i < userIds.length; i++) {
-            await User.findByIdAndUpdate(userIds[i], {
+        // Create an array of promises for each user update
+        const userUpdatePromises = userIds.map(userId => {
+            return User.findByIdAndUpdate(userId, {
                 $push: { participations: newTeam._id },
             });
-        }
+        });
+
+        // Add the creator's team to the participation list
+        userUpdatePromises.push(User.findByIdAndUpdate(userId, {
+            $push: { participations: newTeam._id },
+        }));
+
+        // Execute all update operations concurrently
+        await Promise.all(userUpdatePromises);
 
         await sendEmail("teamRegistration", {
             email: leadUser.email,
@@ -166,7 +159,7 @@ export async function POST(req: any, res: any) {
         }
 
         return NextResponse.json(
-            { message: "Team registered successfully" ,newTeam},
+            { message: "Team registered successfully", newTeam},
             { status: 201 }
         );
     } catch (error) {
