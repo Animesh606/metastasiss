@@ -200,7 +200,7 @@ export default function Login() {
                                 }
                             />
                         </div>
-                        <Link href="/forgotpassword">Forget Password ?</Link>
+                        <Link href="/">Forget Password ?</Link>
                         <input
                             type="submit"
                             value="Login"
