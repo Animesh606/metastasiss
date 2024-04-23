@@ -37,6 +37,9 @@ export const Navbar = () => {
 
                        
                         <li className="rest">
+                            <a href="https://vintagesnakegamegameysio.netlify.app/">Experience</a>
+                        </li >
+                        <li className="rest">
                             <a href="/event">Events</a>
                         </li>
                         <li className="rest">

@@ -14,7 +14,7 @@ export async function POST(req: any, res: any) {
                 { message: "Invalid request origin" },
                 { status: 401 }
             );
-        }
+        } 
        
         // Take team details from request formData
 
@@ -26,9 +26,8 @@ export async function POST(req: any, res: any) {
         const userId = formData.get("userId")?.toString();
         const submission = formData.get("submission")?.toString();
         const leaderIdCard = formData.get("leaderIdCard");
-    
-        // console.log('leaderIdCard:', leaderIdCard);
-        if (!teamName || !submission || !eventName || !members || !userId || !leaderIdCard) {
+        // console.log(leaderIdCard)
+        if (!teamName || !eventName || !members || !userId || !leaderIdCard) {
             return NextResponse.json(
                 { message: "Field Missing" },
                 { status: 400 }
@@ -77,9 +76,10 @@ export async function POST(req: any, res: any) {
             const user = await User.findOne({
                 email: member.email,
                 isVerified: true,
-            }).populate("participations")
-              .select("-password -verificationToken -forgetPasswordToken");
-        
+            })
+                .populate("participations")
+                .select("-password -verificationToken -forgetPasswordToken");
+
             // If user not exist
             if (!user) {
                 throw new Error(`${member.name} is not a verified user`);

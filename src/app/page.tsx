@@ -77,39 +77,27 @@ export default function Home() {
             {/* <h1 className="font-bold"> Rewards</h1> */}
             <span className="devider"></span>
           </div>
-           <div className="not" >
-
-           <div className="notice-board"   onMouseEnter={handleMouseEnter}
-            onMouseLeave={handleMouseLeave}>
-            
-            <marquee
-              ref={marqueeRef}
-              //@ts-ignore
+          {/* <div  className="prizes">
+          <div data-aos="flip-right">
+            <div className="prize">
+            <Image className="Image" src="/snacks.png" alt={""} width={150} height={150}></Image>
+            </div>
+            <h4>Refreshment at event</h4>
+            </div>
+            <div data-aos="zoom-in">
+            <div className="prize">
+            <Image className="Image" src="/prizes.png" alt={""} width={150} height={150}></Image>
+            </div>
+            <h4>Amazing prizes for winners</h4>
+            </div>
            
-           direction="up" scrollamount="2" behavior="scroll">
-                <div className= 'notice blink' >
-                <a href="Brochure.pdf" download>
-                <span> Notice 1: </span>Check out our event brochure for all the exciting details and program schedule
-                   </a>
-                </div>
-                <div className= 'notice blink'>
-                  <p> Notice 2: **** Registration for teams has started ****</p>
-                </div>
-                <div className= 'notice blink'>
-                <a href="Gameysio poster.pdf" download>
-                  <span> Notice 3:</span> Gameysio event poster has released for 2024 !
-                  </a>
-                </div>
-                <div className= 'notice blink'>
-                 <a href="https://drive.google.com/drive/folders/1g1Jc0Nh8vgTmfIqXo6KjLYnpcFxSY1l7">
-                    Notice 4: Sample videos of games
-                    </a>
-                </div>
-                {/* Add more notices as needed */}
-            </marquee>
-          </div>
-           </div>
-         
+            <div data-aos="flip-left">
+            <div className="prize">
+            <Image className="Image" src="/certificate.png" alt={""} width={150} height={150}></Image>
+            </div>
+            <h4>Verified certificates</h4>
+            </div>
+          </div> */}
           <Footer />
         </div>
       )}

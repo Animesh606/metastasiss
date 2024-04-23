@@ -89,7 +89,13 @@ export default function Register() {
             // Send formData to server
             const config = { headers: { "Content-Type": "multipart/form-data" } };
             console.log("before sending data")
-            const response = await axios.post("/api/team", myForm,config);
+            const checkUser = await axios.post("/api/checkuser", myForm,config);
+            console.log(checkUser)
+            myForm.set("checkUserData", JSON.stringify(checkUser.data.member));
+            const users = myForm.get("checkUserData")?.toString();
+         
+             console.log(users)
+              const response = await axios.post("/api/team",myForm,config);
             console.log("after sending data")
             console.log(response)
             // Add toaster and handle response
