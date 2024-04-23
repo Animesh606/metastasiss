@@ -26,7 +26,8 @@ export async function POST(req: any, res: any) {
         const userId = formData.get("userId")?.toString();
         const submission = formData.get("submission")?.toString();
         const leaderIdCard = formData.get("leaderIdCard");
-        // console.log(leaderIdCard)
+        const user= formData.get("checkUserData")?.toString(); 
+         const users=JSON.parse(user);
         if (!teamName || !eventName || !members || !userId || !leaderIdCard) {
             return NextResponse.json(
                 { message: "Field Missing" },
@@ -48,66 +49,12 @@ export async function POST(req: any, res: any) {
         const leadUser = await User.findById(userId)
             .populate("participations")
             .select("-password -verificationToken -forgetPasswordToken");
+ 
 
-        // If leadUser is missing
-        if (!leadUser) {
-            return NextResponse.json(
-                { message: "User is not authenticate" },
-                { status: 401 }
-            )
-        }
-
-        // If leadUser already registered for the event
-        if (leadUser.participations.some((participation: any) => participation.eventName === eventName)) {
-            return NextResponse.json(
-                {
-                    message: `${leadUser.fullName} is already registered for this event`
-                },
-                { status: 403 }
-            )
-        }
-
-        // Parse members
-        const memberArray = await JSON.parse(members);
-
-        // Get all members full details
-        const userPromises = memberArray.map(async (member: any) => {
-            // Get member details
-            const user = await User.findOne({
-                email: member.email,
-                isVerified: true,
-            })
-                .populate("participations")
-                .select("-password -verificationToken -forgetPasswordToken");
-
-            // If user not exist
-            if (!user) {
-                throw new Error(`${member.name} is not a verified user`);
-            }
-        
-            // If user already registered for the event
-            if (user.participations.some((participation: any) => participation.eventName === eventName)) {
-                throw new Error(`${member.name} is already registered for this event`);
-            }
-        
-            return user;
-        });
-
-        let users = [];
-        try {
-            users = await Promise.all(userPromises);
-            // All database calls are complete and successful
-            // Proceed with further processing
-            console.log(users);
-        } catch (error: any) {
-            // Handle errors from individual promises
-            return NextResponse.json({ message: error.message }, { status: 403 });
-        }
-
-        // users with only ids
+        // // Parse members
+     
+         const memberArray = await JSON.parse(members);
         const userIds = users.map((u: any) => u._id);
-
-        // create the team
         const newTeam = new Team({
             teamName, 
             leaderDetails: userId, 
@@ -118,9 +65,9 @@ export async function POST(req: any, res: any) {
         });
 
         await newTeam.save();
-
+  
         // Create an array of promises for each user update
-        const userUpdatePromises = userIds.map(userId => {
+        const userUpdatePromises = userIds.map((userId: any) => {
             return User.findByIdAndUpdate(userId, {
                 $push: { participations: newTeam._id },
             });
@@ -235,7 +182,6 @@ export async function GET(req: NextRequest) {
             { status: 200 }
         );
     } catch (error) {
-        // console.log(error);
         return NextResponse.json(
             { message: "Something Went Wrong.." },
             { status: 500 }
