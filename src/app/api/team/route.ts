@@ -26,8 +26,9 @@ export async function POST(req: any, res: any) {
         const userId = formData.get("userId")?.toString();
         const submission = formData.get("submission")?.toString();
         const leaderIdCard = formData.get("leaderIdCard");
-        const user= formData.get("checkUserData")?.toString(); 
-         const users=JSON.parse(user);
+        // const user= formData.get("checkUserData")?.toString(); 
+        //  const users=JSON.parse(user);
+        console.log(members);
         if (!teamName || !eventName || !members || !userId || !leaderIdCard) {
             return NextResponse.json(
                 { message: "Field Missing" },
@@ -44,29 +45,62 @@ export async function POST(req: any, res: any) {
 
         // Connect with database
         await connectDB();
-
-        // Find leadUserDetails
+        console.log("userId");
         const leadUser = await User.findById(userId)
             .populate("participations")
             .select("-password -verificationToken -forgetPasswordToken");
- 
-
-        // // Parse members
-     
-         const memberArray = await JSON.parse(members);
-        const userIds = users.map((u: any) => u._id);
+         console.log("after call")
+            // If leadUser is missing
+        if (!leadUser) {
+            return NextResponse.json(
+                { message: "User is not authenticate" },
+                { status: 401 }
+            )
+        }
+        if (leadUser.participations.some((participation: any) => participation.eventName === eventName)) {
+            return NextResponse.json(
+                {
+                    message: `${leadUser.fullName} is already registered for this event`
+                },
+                { status: 403 }
+            )
+        }
+        const memberArray = await JSON.parse(members);
+        console.log(memberArray)
+        const userPromises = memberArray.map(async (member: any) => {
+                // Get member details
+               
+                const user = await User.findOne({
+                    email: member.email,
+                
+                })
+                    .populate("participations")
+                    .select("-password -verificationToken -forgetPasswordToken");
+                    return user;
+                });
+                console.log(userPromises)
+                let users = [];
+                try {
+                    users = await Promise.all(userPromises);
+                } catch (error: any) {
+                    // Handle errors from individual promises
+                    return NextResponse.json({ message: error.message }, { status: 403 });
+                }
+                console.log("users : ")
+        console.log(users)
+         const userIds = users.map((u: any) => u._id);
         const newTeam = new Team({
             teamName, 
             leaderDetails: userId, 
-            members: userIds, 
+            members:userId, 
             eventName, 
             collegeId: url, 
             submission,
         });
-
+        console.log("after");
         await newTeam.save();
-  
-        // Create an array of promises for each user update
+        console.log("after");
+       // Create an array of promises for each user update
         const userUpdatePromises = userIds.map((userId: any) => {
             return User.findByIdAndUpdate(userId, {
                 $push: { participations: newTeam._id },
@@ -80,7 +114,6 @@ export async function POST(req: any, res: any) {
 
         // Execute all update operations concurrently
         await Promise.all(userUpdatePromises);
-
         await sendEmail("teamRegistration", {
             email: leadUser.email,
             fullName: leadUser.fullName,
@@ -92,18 +125,18 @@ export async function POST(req: any, res: any) {
             link: ""
         });
 
-        for(let i = 0; i < users.length; i++) {
-            await sendEmail("teamRegistration", {
-                email: users[i].email,
-                fullName: users[i].fullName,
-                teamName,
-                eventName,
-                leadUser,
-                members: memberArray,
-                sumittedBy: undefined,
-                link: ""
-            });
-        }
+        // for(let i = 0; i < users.length; i++) {
+        //     await sendEmail("teamRegistration", {
+        //         email: users[i].email,
+        //         fullName: users[i].fullName,
+        //         teamName,
+        //         eventName,
+        //         leadUser,
+        //         members: memberArray,
+        //         sumittedBy: undefined,
+        //         link: ""
+        //     });
+        // }
 
         return NextResponse.json(
             { message: "Team registered successfully", newTeam},
@@ -126,10 +159,8 @@ export async function GET(req: NextRequest) {
                 { status: 401 }
             );
         }
-
         // Connect with database
         await connectDB();
-
         // Find all the team Details
         const teams = await Team.aggregate([
             {

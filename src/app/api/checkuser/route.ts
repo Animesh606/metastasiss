@@ -27,14 +27,19 @@ export async function POST(req: any, res: any) {
                 { status: 400 }
             );
         }
-
+        console.log(teamName);
+        console.log(eventName);
+        console.log(userId);
+        console.log(members);
         // Connect with database
         await connectDB();
         // Find leadUserDetails
+        console.log("before call")
         const leadUser = await User.findById(userId)
-            .populate("participations")
+            // .populate("participations")
             .select("-password -verificationToken -forgetPasswordToken");
-        // If leadUser is missing
+         console.log("after call")
+            // If leadUser is missing
         if (!leadUser) {
             return NextResponse.json(
                 { message: "User is not authenticate" },
@@ -61,7 +66,7 @@ export async function POST(req: any, res: any) {
                 email: member.email,
                 isVerified: true,
             })
-                .populate("participations")
+                // .populate("participations")
                 .select("-password -verificationToken -forgetPasswordToken");
 
             // If user not exist
@@ -70,9 +75,9 @@ export async function POST(req: any, res: any) {
             }
         
             // If user already registered for the event
-            if (user.participations.some((participation: any) => participation.eventName === eventName)) {
-                throw new Error(`${member.name} is already registered for this event`);
-            }
+            // if (user.participations.some((participation: any) => participation.eventName === eventName)) {
+            //     throw new Error(`${member.name} is already registered for this event`);
+            // }
         
             return user;
         });
