@@ -25,23 +25,23 @@ export async function POST(req: any, res: any) {
         const members = formData.get("members")?.toString();
         const userId = formData.get("userId")?.toString();
         const submission = formData.get("submission")?.toString();
-        const leaderIdCard = formData.get("leaderIdCard");
+        // const leaderIdCard = formData.get("leaderIdCard");
         // const user= formData.get("checkUserData")?.toString(); 
         //  const users=JSON.parse(user);
         console.log(members);
-        if (!teamName || !eventName || !members || !userId || !leaderIdCard) {
+        if (!teamName || !eventName || !members || !userId ) {
             return NextResponse.json(
                 { message: "Field Missing" },
                 { status: 400 }
             );
         }
 
-        const mycloud = await cloudinary.uploader.upload(leaderIdCard, {
-            folder: "WebData/Metastasiss/CollegeId/",
-            width: 150,
-            crop: "scale",
-        });
-        const url = mycloud.secure_url;
+        // const mycloud = await cloudinary.uploader.upload(leaderIdCard, {
+        //     folder: "WebData/Metastasiss/CollegeId/",
+        //     width: 150,
+        //     crop: "scale",
+        // });
+        const url ="";
 
         // Connect with database
         await connectDB();

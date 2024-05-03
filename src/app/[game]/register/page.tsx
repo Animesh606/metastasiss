@@ -84,7 +84,7 @@ export default function Register() {
             myForm.set("eventName", formattedString);
             myForm.set("members", JSON.stringify(members));
             myForm.set("userId", user?._id || "");
-            myForm.set("leaderIdCard", leaderIdCard);
+            // myForm.set("leaderIdCard", leaderIdCard);
             myForm.set("submission"," ");
             // Send formData to server
             const config = { headers: { "Content-Type": "multipart/form-data" } };
@@ -259,7 +259,7 @@ export default function Register() {
                                         ))}
                                     </div>
 
-                                    <div className="file">
+                                    {/* <div className="file">
                                         <label htmlFor="phoneNumber">
                                             Leader&apos;s Id card (less than 2MB and upload only pdf or jpeg )
                                         </label>
@@ -272,7 +272,7 @@ export default function Register() {
                                                 onChange={handleLeaderIdCardChange}
                                             />
                                         </div>
-                                    </div>
+                                    </div> */}
                                     <div className="form-submit-btn">
                                         <div>
                                             <input
