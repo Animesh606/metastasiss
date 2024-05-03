@@ -26,7 +26,7 @@ export default function Register() {
     const { data, status } = useSession();
     const [teamName, setTeamName] = useState<string>("");
     const [members, setMembers] = useState<Member[]>([]);
-    const [leaderIdCard, setLeaderIdCard] = useState<any | null>(null);
+    const [leaderIdCard, setLeaderIdCard] =useState<string>("");
     const [loader, setLoader] = useState(false);
     const params = useParams<{
         [x: string]: any; tag: string; item: string
@@ -84,22 +84,19 @@ export default function Register() {
             myForm.set("eventName", formattedString);
             myForm.set("members", JSON.stringify(members));
             myForm.set("userId", user?._id || "");
-            // myForm.set("leaderIdCard", leaderIdCard);
+            myForm.set("leaderIdCard", leaderIdCard);
             myForm.set("submission"," ");
             // Send formData to server
             const config = { headers: { "Content-Type": "multipart/form-data" } };
-            console.log("before sending data")
-            // const checkUser = await axios.post("/api/checkuser", myForm,config);
-            // console.log("checkUser")
-            // myForm.set("checkUserData", JSON.stringify(checkUser.data.member));
+            // console.log("before sending data")
+         
             const response = await axios.post("/api/team",myForm,config);
-            console.log("after sending data")
-            // console.log(response)
-            // Add toaster and handle response
+            // console.log("after sending data")
+      
             toast.success("Team registered Successfully"); 
 
         } catch (error: any) {
-            console.log(error);
+            // console.log(error);
             toast.error(`${error.response.data.message}`);
          
         } finally {
@@ -117,36 +114,36 @@ export default function Register() {
         setMembers(updatedMembers);
     };
 
-    const handleLeaderIdCardChange = (
-        event:any
-    ) => {
-        const file = event.target.files && event.target.files[0];
-        const limit=2000;
+    // const handleLeaderIdCardChange = (
+    //     event:any
+    // ) => {
+    //     const file = event.target.files && event.target.files[0];
+    //     const limit=2000;
        
-        if (file) {
+    //     if (file) {
          
-            if((file.size/1024)>limit)
-            {
+    //         if((file.size/1024)>limit)
+    //         {
                
-                if( event.target.files)
-                setLeaderIdCard(null);
-                toast.error(`size is greater than 2MB please select another file`)
-            }
-            else
-            {
+    //             if( event.target.files)
+    //             setLeaderIdCard(null);
+    //             toast.error(`size is greater than 2MB please select another file`)
+    //         }
+    //         else
+    //         {
                
-                    const reader = new FileReader();
+    //                 const reader = new FileReader();
               
-                    reader.onload = () => {
-                      if (reader.readyState === 2) {
-                        // Cast reader.result to string
-                        setLeaderIdCard(reader.result);
-                      }
-                    };
-                    reader.readAsDataURL(event.target.files[0]);
-                  } 
-            }
-        }
+    //                 reader.onload = () => {
+    //                   if (reader.readyState === 2) {
+    //                     // Cast reader.result to string
+    //                     setLeaderIdCard(reader.result);
+    //                   }
+    //                 };
+    //                 reader.readAsDataURL(event.target.files[0]);
+    //               } 
+    //         }
+    //     }
 
 
     return (
@@ -259,20 +256,23 @@ export default function Register() {
                                         ))}
                                     </div>
 
-                                    {/* <div className="file">
+                                    <div className="file">
                                         <label htmlFor="phoneNumber">
-                                            Leader&apos;s Id card (less than 2MB and upload only pdf or jpeg )
+                                            Leader&apos;s Id card (give the drive link of your id card )
                                         </label>
-                                        <div className="user-input-boxx">
+                                        <div className="user-input-box">
                                             <input
                                                 required
+                                                placeholder="Drive link"
                                                 name="leaderIdCard"
-                                                type="file"
+                                                type="text"
                                                 id="leaderIdCard"
-                                                onChange={handleLeaderIdCardChange}
+                                                onChange={(e) =>
+                                                    setLeaderIdCard(e.target.value)
+                                                }
                                             />
                                         </div>
-                                    </div> */}
+                                    </div>
                                     <div className="form-submit-btn">
                                         <div>
                                             <input

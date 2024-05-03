@@ -5,7 +5,7 @@ import User from "@/models/user.model";
 import Team from "@/models/team.model";
 import sendEmail from "@/utils/mailer";
 import validOrigin from "@/utils/apiRequestOrigin";
-import cloudinary from "@/../cloudinary.config";
+// import cloudinary from "@/../cloudinary.config";
 export async function POST(req: any, res: any) {
     try {
         // Check if refer from frontend
@@ -25,11 +25,8 @@ export async function POST(req: any, res: any) {
         const members = formData.get("members")?.toString();
         const userId = formData.get("userId")?.toString();
         const submission = formData.get("submission")?.toString();
-        // const leaderIdCard = formData.get("leaderIdCard");
-        // const user= formData.get("checkUserData")?.toString(); 
-        //  const users=JSON.parse(user);
-        console.log(members);
-        if (!teamName || !eventName || !members || !userId ) {
+        const leaderIdCard = formData.get("leaderIdCard");
+        if (!teamName || !eventName || !members || !userId || !leaderIdCard) {
             return NextResponse.json(
                 { message: "Field Missing" },
                 { status: 400 }
@@ -41,15 +38,14 @@ export async function POST(req: any, res: any) {
         //     width: 150,
         //     crop: "scale",
         // });
-        const url ="";
 
         // Connect with database
         await connectDB();
-        console.log("userId");
+        // console.log("userId");
         const leadUser = await User.findById(userId)
             .populate("participations")
             .select("-password -verificationToken -forgetPasswordToken");
-         console.log("after call")
+        //  console.log("after call")
             // If leadUser is missing
         if (!leadUser) {
             return NextResponse.json(
@@ -66,7 +62,6 @@ export async function POST(req: any, res: any) {
             )
         }
         const memberArray = await JSON.parse(members);
-        console.log(memberArray)
         const userPromises = memberArray.map(async (member: any) => {
                 // Get member details
                
@@ -78,7 +73,6 @@ export async function POST(req: any, res: any) {
                     .select("-password -verificationToken -forgetPasswordToken");
                     return user;
                 });
-                console.log(userPromises)
                 let users = [];
                 try {
                     users = await Promise.all(userPromises);
@@ -86,20 +80,16 @@ export async function POST(req: any, res: any) {
                     // Handle errors from individual promises
                     return NextResponse.json({ message: error.message }, { status: 403 });
                 }
-                console.log("users : ")
-        console.log(users)
          const userIds = users.map((u: any) => u._id);
         const newTeam = new Team({
             teamName, 
             leaderDetails: userId, 
             members:userId, 
             eventName, 
-            collegeId: url, 
+            collegeId: leaderIdCard, 
             submission,
         });
-        console.log("after");
         await newTeam.save();
-        console.log("after");
        // Create an array of promises for each user update
         const userUpdatePromises = userIds.map((userId: any) => {
             return User.findByIdAndUpdate(userId, {

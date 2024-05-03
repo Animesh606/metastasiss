@@ -59,13 +59,13 @@
     display: flex;
     border: .1px solid grey;
 }
-.user-input-boxx input{
+/* .user-input-boxx input{
     font-size: 20px;
     color:aliceblue;
-} 
+}  */
 .user-input-boxx label{
     width: 95%;
-    color: white;
+    /* color: white; */
     font-size: 20px;
     font-weight: 400;
     margin: 5px 0;
@@ -87,6 +87,7 @@
     flex-wrap: wrap;
     width: 100%;
     padding-bottom: 15px;
+    padding-top: 10px;
    
 }
 
