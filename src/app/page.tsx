@@ -14,13 +14,11 @@ declare namespace JSX {
 }
 export default function Home() {
  const marqueeRef = useRef<any>(null);
-
     const handleMouseEnter = () => {
         if (marqueeRef.current) {
             (marqueeRef.current ).stop();
         }
     };
-
     const handleMouseLeave = () => {
         if (marqueeRef.current) {
             (marqueeRef.current).start();
@@ -37,7 +35,6 @@ export default function Home() {
     }, 1000);
     return () => clearTimeout(timer);
   }, []);
-
   return (
     <>
       {loading ? (
@@ -52,7 +49,7 @@ export default function Home() {
                 <div  className="firsti">
                         <h1 data-aos="zoom-in"><span className="txt-rotate"  ><span  className="wrap">Meta-Stasiss</span></span></h1>
                         <p><strong> Revolutionize the way Medical Science is taught and learned. We are dedicated to leveraging innovative technologies and gamification strategies to simplify complex physiological concepts, making them more accessible and engaging to learners of all backgrounds.</strong></p>
-                        <button onClick={() =>router.push(status==="authenticated"?"/event":"/login")}><span>Let&apos;s connect</span> </button>
+                        <button onClick={() =>router.push(status==="authenticated"?"/even":"/login")}><span>Let&apos;s connect</span> </button>
                 </div>
                 <div  className="secondi" >
                   <Image className="Image" src="/vr2.png" alt={""} width={150} height={150}></Image>
@@ -77,27 +74,40 @@ export default function Home() {
             {/* <h1 className="font-bold"> Rewards</h1> */}
             <span className="devider"></span>
           </div>
-          {/* <div  className="prizes">
-          <div data-aos="flip-right">
-            <div className="prize">
-            <Image className="Image" src="/snacks.png" alt={""} width={150} height={150}></Image>
-            </div>
-            <h4>Refreshment at event</h4>
-            </div>
-            <div data-aos="zoom-in">
-            <div className="prize">
-            <Image className="Image" src="/prizes.png" alt={""} width={150} height={150}></Image>
-            </div>
-            <h4>Amazing prizes for winners</h4>
-            </div>
+           <div className="not" >
+           <div className="notice-board"   onMouseEnter={handleMouseEnter}
+            onMouseLeave={handleMouseLeave}>
+            
+            <marquee
+              ref={marqueeRef}
+              //@ts-ignore
            
-            <div data-aos="flip-left">
-            <div className="prize">
-            <Image className="Image" src="/certificate.png" alt={""} width={150} height={150}></Image>
-            </div>
-            <h4>Verified certificates</h4>
-            </div>
-          </div> */}
+           direction="up" scrollamount="2" behavior="scroll">
+                <div className= 'notice blink' >
+                <a href="Brochure.pdf" download>
+                <span> Notice 1: </span>Check out our event brochure for all the exciting details and program schedule
+                   </a>
+                </div>
+                <div className= 'notice blink'>
+                  <p> Notice 2: **** Registration will be closed on 9th May 2024 ****</p>
+                </div>
+                <div className= 'notice blink'>
+                {/* <a href="brochure.pdf" download>
+                  <span> Notice 3:</span> Gameysio event banner has released for 2024 ! */}
+                <a href="Gameysio poster.pdf" download>
+                  <span> Notice 3:</span> Gameysio event poster has released for 2024 !
+                  </a>
+                </div>
+                <div className= 'notice blink'>
+                 <a href="https://drive.google.com/drive/folders/1g1Jc0Nh8vgTmfIqXo6KjLYnpcFxSY1l7">
+                    Notice 4: Sample videos of games
+                    </a>
+                </div>
+                {/* Add more notices as needed */}
+            </marquee>
+          </div>
+           </div>
+         
           <Footer />
         </div>
       )}
