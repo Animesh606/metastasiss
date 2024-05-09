@@ -93,12 +93,12 @@ export default function Event() {
               height={150}
             />
             <div className={`cardOverlay ${isCardOpenfirst ? "open" : ""}`}>
-              <button
+              {/* <button
                 onClick={() => register("game_showcasing")}
                 className="registerButton button-19"
               >
                 Register
-              </button>
+              </button> */}
               <button   onClick={() => submit("game_showcasing")} className="submitButton button-19">Submit</button>
             </div>
           </div>
@@ -117,12 +117,12 @@ export default function Event() {
               height={150}
             />
             <div className={`cardOverlay ${isCardOpensecond ? "open" : ""}`}>
-              <button
+              {/* <button
                 onClick={() => register('Gaming_competition')}
                 className="registerButton button-19"
               >
                 Register
-              </button>
+              </button> */}
               <button  onClick={() => submit('Gaming_competition')} className="submitButton button-19">Submit</button>
             </div>
           </div>
@@ -141,12 +141,12 @@ export default function Event() {
               height={150}
             />
             <div className={`cardOverlay ${isCardOpenthird ? "open" : ""}`}>
-              <button
+              {/* <button
                 onClick={() => register('Meme_competition')}
                 className="registerButton button-19"
               >
                 Register
-              </button>
+              </button> */}
               <button onClick={() => submit('Meme_competition')} className="submitButton button-19">Submit</button>
             </div>
           </div>
@@ -165,12 +165,12 @@ export default function Event() {
               height={150}
             />
             <div className={`cardOverlay ${isCardOpenfourth ? "open" : ""}`}>
-              <button
+              {/* <button
                 onClick={() => register('Quiz_Competition')}
                 className="registerButton button-19"
               >
                 Register
-              </button>
+              </button> */}
               <button  onClick={() => submit('Quiz_Competition')} className="submitButton button-19" disabled>Submit</button>
             </div>
           </div>

@@ -89,7 +89,7 @@ export default function Home() {
                    </a>
                 </div>
                 <div className= 'notice blink'>
-                  <p> Notice 2: **** Registration will be closed on 9th May 2024 ****</p>
+                  <p> Notice 2: **** Registration has been closed ****</p>
                 </div>
                 <div className= 'notice blink'>
                 {/* <a href="brochure.pdf" download>
