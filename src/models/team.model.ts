@@ -23,6 +23,10 @@ const teamSchema = new mongoose.Schema(
         submission:{
             type: String,
             default:" ",
+        },
+        voteCount: {
+            type: Number,
+            default: 0
         }
     },
     {

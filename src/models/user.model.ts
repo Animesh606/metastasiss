@@ -43,6 +43,10 @@ const userSchema = new mongoose.Schema(
             type: mongoose.Schema.Types.ObjectId,
             ref: "Team"
         }],
+        votedTeam: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "Team"
+        },
         profileImage: String,
         verificationToken: String,
         forgetPasswordToken: String
